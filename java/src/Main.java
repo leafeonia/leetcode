@@ -1,7 +1,9 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(Solution.lengthOfLongestSubstring("pqwdp"));
+        Solution solution = new Solution();
+        int nums[] = {-1};
+        System.out.println(solution.maxSubArray(nums));
     }
 }
 
