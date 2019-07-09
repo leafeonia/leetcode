@@ -10,6 +10,3 @@ class Solution:
             return ans
         else:
             return 0
-
-sol = Solution()
-print(Solution.reverse(sol,1534236469))
