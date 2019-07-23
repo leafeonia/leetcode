@@ -1,8 +1,6 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-
-int main(){
+class Solution {
+public:
+    int dp[102][102];
     int uniquePaths(int m, int n) {
         dp[1][1] = 1;
         for (int i = 1; i <= m; ++i) {
@@ -13,5 +11,4 @@ int main(){
         }
         return dp[m][n];
     }
-    return 0;
-}
+};
