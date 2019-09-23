@@ -1,40 +1,60 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define N 10002
 
-class Solution {
-public:
-    bool valid(vector<string> list){
-        int cnt = 0;
-        for(string s: list){
-            if(s == "(") cnt++;
-            else cnt--;
-            if(cnt < 0) return false;
-        }
-        return true;
-    }
-    vector<string> generateParenthesis(int n) {
-        vector<string> origin;
-        vector<string> ans;
-        for (int i = 0; i < n; ++i) {
-            origin.push_back("(");
-        }
-        for (int i = 0; i < n; ++i) {
-            origin.push_back(")");
-        }
-        do{
-            if(valid(origin)){
-                string s = "";
-                for(string st: origin) s += st;
-                ans.push_back(s);
-            }
-        }while (next_permutation(origin.begin(), origin.end()));
-        return ans;
-    }
+int ans[N];
+bool visited[N];
+struct node{
+    node(int vv = 0,int cc = 0){v = vv;c = cc;}
+    int v,c;
 };
 
+bool operator < (node n1,node n2){
+    return n1.c > n2.c;
+}
+
+struct edge{
+    int to,weight;
+    edge(int tto = 0,int wweight = 0){to = tto;weight = wweight;}
+};
+
+vector<edge> E[N];
+
+void dijkstra(int start){
+    for (int i = 0; i < N; ++i) {
+        ans[i] = 0x3f3f3f3f;
+    }
+    memset(visited,false,sizeof(visited));
+    ans[start] = 0;
+    priority_queue<node> pq;
+    while(!pq.empty())pq.pop();
+    pq.push(node(start,0));
+    node temp;
+    while(!pq.empty()){
+        temp = pq.top();
+        pq.pop();
+        int u = temp.v;
+        if(visited[u]) continue;
+        visited[u] = true;
+        for (int i = 0; i < E[u].size(); ++i) {
+            int next = E[u][i].to;
+            int weight = E[u][i].weight;
+            if(!visited[next] && ans[next] > ans[u]+weight ){
+                ans[next] = ans[u] + weight;
+                pq.push(node(next,ans[next]));
+            }
+        }
+    }
+}
+
+
+
 int main(){
-    Solution solution;
-    vector<string> ret = solution.generateParenthesis(3);
-    for(string s: ret) cout << s << endl;
+    freopen("in2.txt","r",stdin);
+    int from,to;
+    for (int i = 0; i < m; ++i) {
+        scanf("%d %d %d",&from,&to,&w);
+        E[from].push_back(edge(to,w));
+    }
     return 0;
 }
