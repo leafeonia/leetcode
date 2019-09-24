@@ -1,30 +1,45 @@
-class Solution {
-    public int[] searchRange(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length - 1;
+import java.util.Vector;
 
-        int left = -1, right = -1;
-        while(start <= end){
-            int middle = (start + end) / 2;
-            if (nums[middle] == target && (middle == 0 || nums[middle-1] != target)){
-                left = middle;
-                break;
-            }
-            if (nums[middle] < target) start = middle + 1;
-            else end = middle - 1;
+class Solution {
+    public int ch2int(char ch){
+        if(ch == '.') return 0;
+        return ch - '0';
+    }
+    public boolean valid(Vector<Integer> v){
+        int counter[] = {0,0,0,0,0,0,0,0,0,0};
+        for (Integer i: v) {
+            counter[i]++;
+            if(counter[i] > 1 && i > 0) return false;
         }
-        start = 0;
-        end = nums.length - 1;
-        while(start <= end){
-            int middle = (start + end) / 2;
-            if (nums[middle] == target && (middle == nums.length - 1 || nums[middle+1] != target)){
-                right = middle;
-                break;
+        return true;
+    }
+    public boolean isValidSudoku(char[][] board) {
+        Vector<Integer> v = new Vector<>();
+        for(int i = 0;i < 9;i++){
+            v.clear();
+            for(int j = 0;j < 9;j++){
+                v.addElement(ch2int(board[i][j]));
             }
-            if (nums[middle] > target) end = middle - 1;
-            else start = middle + 1;
+            if(!valid(v)) return false;
+            v.clear();
+            for(int j = 0;j < 9;j++){
+                v.addElement(ch2int(board[j][i]));
+            }
+            if(!valid(v)) return false;
         }
-        int ans[] = {left, right};
-        return ans;
+        for(int i = 0;i < 3;i++){
+            for(int j = 0;j < 3;j++){
+                int x = 3*i;
+                int y = 3*j;
+                v.clear();
+                for (int k = 0;k < 3;k++){
+                    for(int l = 0;l < 3;l++){
+                        v.addElement(ch2int(board[x+k][y+l]));
+                    }
+                }
+                if (!valid(v)) return false;
+            }
+        }
+        return true;
     }
 }
