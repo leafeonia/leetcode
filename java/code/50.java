@@ -10,9 +10,9 @@ class Solution {
         n = Math.abs(n);
 
         /*
-        * 2^21
-        * 2^(10101)
-        * */
+         * 2^21
+         * 2^(10101)
+         * */
         double ret = 1;
         while(n > 0){
             int bit = n & 1;
