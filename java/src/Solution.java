@@ -1,29 +1,19 @@
-import java.util.*;
 
 class Solution {
-    public String sort(String s){
-        char[] chars = s.toCharArray();
-        Arrays.sort(chars);
-        return new String(chars);
+    public void rotate_layer(int[][] matrix, int layer){
+        int n = matrix.length;
+        for (int i = layer;i < n - layer - 1;i++){
+            int temp = matrix[layer][i];
+            matrix[layer][i] = matrix[n - 1 - i][layer];
+            matrix[n-1-i][layer] = matrix[n-1-layer][n-1-i];
+            matrix[n-1-layer][n-1-i] = matrix[i][n-1-layer];
+            matrix[i][n-1-layer] = temp;
+        }
     }
-    public List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> ans = new ArrayList();
-        HashMap<String, List<String>> mp = new HashMap<>();
-        for (String s: strs){
-            List<String> list = mp.get(sort(s));
-            if(list == null){
-                list = new ArrayList<>();
-                list.add(s);
-                mp.put(sort(s), list);
-            }
-            else{
-                list.add(s);
-            }
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        for (int i = 0;i < n / 2;i++){
+            rotate_layer(matrix, i);
         }
-        for (Map.Entry<String, List<String>> entry: mp.entrySet()){
-            List<String> value = entry.getValue();
-            ans.add(value);
-        }
-        return ans;
     }
 }
