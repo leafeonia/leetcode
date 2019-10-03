@@ -16,8 +16,3 @@ class Solution:
                 right -= 1
             else:
                 i += 1
-
-solution = Solution()
-a = [1,2,0]
-solution.sortColors(a)
-print(a)
