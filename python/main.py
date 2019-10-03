@@ -1,23 +1,6 @@
-class Solution:
-    def sortColors(self, nums) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
-        left = 0
-        right = len(nums)-1
-        i = 0
-        while i <= right:
-            if nums[i] == 0:
-                nums[left], nums[i] = nums[i], nums[left]
-                left += 1
-                i += 1
-            elif nums[i] == 2:
-                nums[right], nums[i] = nums[i], nums[right]
-                right -= 1
-            else:
-                i += 1
+from Solution import *
 
 solution = Solution()
-a = [1,2,0]
-solution.sortColors(a)
-print(a)
+a = [1,2,3]
+ret = solution.subsets(a)
+print(ret)
