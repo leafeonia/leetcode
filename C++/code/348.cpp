@@ -1,4 +1,3 @@
-#include <bits/stdc++.h>
 #define FAIL 0x3f3f3f3f
 
 class TicTacToe {
@@ -9,7 +8,7 @@ public:
     TicTacToe(int N) {
         n = N;
         lines = new int[2*n + 3];
-        memset(lines, 0, sizeof(int)*(2*n+3));
+        memset(lines, 0, sizeof(int) * (2*n+3));
     }
 
     /** Player {player} makes a move at ({row}, {col}).
@@ -39,7 +38,7 @@ public:
                 }
                 else lines[2*n] = FAIL;
             }
-            if(row + col == n){
+            if(row + col == n - 1){
                 if(lines[2*n + 1] >= 0 && lines[2*n + 1] != FAIL) {
                     lines[2*n + 1]++;
                     if(lines[2*n + 1] == n) return 1;
@@ -65,7 +64,7 @@ public:
                 }
                 else lines[2*n] = FAIL;
             }
-            if(row + col == n){
+            if(row + col == n - 1){
                 if(lines[2*n + 1] <= 0) {
                     lines[2*n + 1]--;
                     if(lines[2*n + 1] == -n) return 2;
@@ -81,4 +80,7 @@ public:
  * Your TicTacToe object will be instantiated and called as such:
  * TicTacToe* obj = new TicTacToe(n);
  * int param_1 = obj->move(row,col,player);
- */
+ *///
+// Created by maoym on 2019/10/5.
+//
+
