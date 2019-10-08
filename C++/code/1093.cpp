@@ -39,4 +39,7 @@ public:
         vector<double> ans({double(mini),double(maxi),double(sum)/cntsum,mid,double(most)});
         return ans;
     }
-};
+};//
+// Created by maoym on 2019/10/8.
+//
+

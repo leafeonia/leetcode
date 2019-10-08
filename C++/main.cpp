@@ -3,6 +3,6 @@ using namespace std;
 
 int main(){
     Solution sol;
-    sol.flipLights(2,1);
+    cout << (double)1 << " " << double(1);
     return 0;
 }
