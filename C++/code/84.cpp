@@ -10,13 +10,16 @@ public:
     int largestRectangleArea(vector<int>& heights) {
         heights.push_back(0);
         stack<column> s;
+        s.push(column(-1,-1));
         int ans = 0;
         for(int i = 0;i < heights.size();i++){
             column newcol(heights[i], i);
             ans = max(ans, heights[i]);
-            while(!s.empty() && heights[i] <= s.top().height){
-                ans = max(ans, s.top().height * (i - s.top().index));
+            while(heights[i] <= s.top().height){
+                int h = s.top().height;
+                int ind = s.top().index;
                 s.pop();
+                ans = max(ans, h * (i - s.top().index - 1));
             }
             s.push(newcol);
         }
