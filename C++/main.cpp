@@ -4,7 +4,6 @@ using namespace std;
 
 int main(){
     Solution sol;
-    vector<int> v{2,1,5,6,2,3};
-    cout << sol.largestRectangleArea(v);
+    cout << sol.isValid("<DIV>This is the first line <![CDATA[<div>]]></DIV>");
     return 0;
 }
