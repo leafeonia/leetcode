@@ -1,74 +1,68 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Excel {
+struct info{
+    string sentence;
+    int times;
+    info(string s, int t){sentence = s; times = t;}
+    bool operator < (const info& i2){
+        return (times == i2.times ? sentence < i2.sentence : times > i2.times);
+    }
+};
+
+class AutocompleteSystem {
 public:
-    vector<vector<int>> board;
-    vector<string> func[27][27];
-    int h,w;
-    Excel(int H, char W) {
-        board = vector<vector<int> >(H + 1,vector<int>(W - 'A' + 1));
-        for(auto v:board) v.clear();
-        for(int i = 0;i < H;i++) for(int j = 0;j < W - 'A' + 1;j++) func[i][j].clear();
-        h = H;
-        w = W - 'A' + 1;
+    vector<info> v;
+    string cur;
+    AutocompleteSystem(vector<string>& sentences, vector<int>& times) {
+        for(int i = 0;i < times.size();i++){
+            v.push_back(info(sentences[i], times[i]));
+        }
+        cur = "";
+        sort(v.begin(), v.end());
     }
 
-    void calc(){
-        for (int i = 0; i < h; ++i){
-            for(int j = 0;j < w;j++){
-                if(!func[i][j].empty()){
-                    int val = 0;
-                    for(string s: func[i][j]){
-                        if(s.length() <= 3){
-                            val += board[stoi(s.substr(1)) - 1][s[0] - 'A'];
-                        }
-                        else{
-                            int col1 = s[0] - 'A';
-                            int row1 = s[1] - '0';
-                            if(s[2] != ':') {
-                                row1 = 10*row1 + s[2] - '0';
-                                s = s.substr(4);
-                            }
-                            else s = s.substr(3);
-                            int col2 = s[0] - 'A';
-                            int row2 = s[1] - '0';
-                            if(s.length() > 2) row2 = 10*row2 + s[2] - '0';
-                            for(int k = row1 - 1;k <= row2 - 1;k++){
-                                for(int l = col1;l <= col2;l++){
-                                    val += board[k][l];
-                                }
-                            }
-                        }
+    vector<string> input(char c) {
+        vector<string> ret;
+        if(c == '#') {
+            bool found = false;
+            for(auto it = v.begin(); it != v.end(); it++){
+                if((*it).sentence == cur) {
+                    (*it).times++;
+//                    sort(v.begin(), v.end());
+                    while(it != v.begin() && (*(it - 1) > *it)) {
+                        iter_swap(it,it-1);
+                        it--;
                     }
-                    board[i][j] = val;
+                    found = true;
+                    break;
                 }
             }
+            if(!found) {
+                v.push_back(info(cur,1));
+                sort(v.begin(), v.end());
+            }
+
+            cur = "";
+            return ret;
         }
-    }
+        int cnt = 0;
+        cur += c;
+        int le = cur.length();
+        for(auto s: v){
+            if(s.sentence.length() >= le && s.sentence.substr(0, le) == cur){
+                ret.push_back(s.sentence);
+                cnt++;
+                if(cnt == 3) break;
+            }
+        }
+        return ret;
 
-    void set(int r, char c, int v) {
-        board[r-1][c - 'A'] = v;
-        func[r-1][c - 'A'].clear();
-    }
-
-    int get(int r, char c) {
-        calc();
-        return board[r-1][c - 'A'];
-    }
-
-    int sum(int r, char c, vector<string> strs) {
-        for(auto s: strs)
-            func[r-1][c - 'A'].push_back(s);
-        calc();
-        return board[r-1][c - 'A'];
     }
 };
 
 /**
- * Your Excel object will be instantiated and called as such:
- * Excel* obj = new Excel(H, W);
- * obj->set(r,c,v);
- * int param_2 = obj->get(r,c);
- * int param_3 = obj->sum(r,c,strs);
+ * Your AutocompleteSystem object will be instantiated and called as such:
+ * AutocompleteSystem* obj = new AutocompleteSystem(sentences, times);
+ * vector<string> param_1 = obj->input(c);
  */
