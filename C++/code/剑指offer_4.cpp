@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
     bool findNumberIn2DArray(vector<vector<int>>& matrix, int target) {
@@ -10,11 +7,12 @@ public:
         int col = m - 1;
         int row = 0;
         while(col >= 0){
-            while(matrix[row][col] <= target && row < n){
+            while(matrix[row][col] <= target){
                 if(matrix[row][col] == target) return true;
                 row++;
+                if(row == n) return false;
             }
-            if(row == n) return false;
+            
             col--;
         }
         return false;

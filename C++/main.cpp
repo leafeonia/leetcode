@@ -1,25 +1,11 @@
 #include "solution.cpp"
 using namespace std;
 
-void print(vector<string> v){
-    for(auto s: v) cout << s << ",";
-    cout << endl;
-}
+
 int main() {
-    vector<string> v1({"i love you","island","iroman","i love leetcode"});
-    vector<int> v2({5,3,2,2});
-    AutocompleteSystem *obj = new AutocompleteSystem(v1, v2);
-    print(obj->input('i'));
-    print(obj->input(' '));
-    print(obj->input('a'));
-    print(obj->input('#'));
-    print(obj->input('i'));
-    print(obj->input(' '));
-    print(obj->input('a'));
-    print(obj->input('#'));
-    print(obj->input('i'));
-    print(obj->input(' '));
-    print(obj->input('a'));
-    print(obj->input('#'));
+
+    vector<vector<int>> v({{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}});
+    Solution solution;
+    cout << solution.findNumberIn2DArray(v,20);
     return 0;
 }
