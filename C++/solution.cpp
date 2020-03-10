@@ -12,20 +12,34 @@ struct TreeNode {
 
 class Solution {
 public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        if(preorder.empty()) return NULL;
-        TreeNode* root = new TreeNode(preorder[0]);
-        int pos = find(inorder.begin(),inorder.end(),root->val) - inorder.begin();
-        root->left = buildTree(preorder, inorder, 1, pos, 0, pos - 1);
-        root->right = buildTree(preorder, inorder, pos + 1, preorder.size() - 1, pos + 1, preorder.size() - 1);
-        return root;
+    int sumNumbers(TreeNode* root){
+        if(!root) return 0;
+        return sumNumbers_(root);
     }
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder, int preLeft, int preRight, int inLeft, int inRight){
-        if(preLeft > preRight || inLeft > inRight) return NULL;
-        TreeNode* ret = new TreeNode(preorder[preLeft]);
-        int pos = find(inorder.begin(),inorder.end(),ret->val) - inorder.begin();
-        ret->left = buildTree(preorder, inorder, preLeft + 1, preRight, inLeft, pos - 1);
-        ret->right = buildTree(preorder, inorder, preLeft + 1 + pos - inLeft, preRight, pos + 1, inRight);
+    int sumNumbers_(TreeNode* root) {
+        if(!root) return -1;
+        int left = sumNumbers(root->left);
+        int right = sumNumbers(root->right);
+        int leftCount, rightCount;
+        leftCount = rightCount = 0;
+        int temp = left;
+        while(temp){
+            temp /= 10;
+            leftCount++;
+        }
+        temp = right;
+        while(temp){
+            temp /= 10;
+            rightCount++;
+        }
+
+        //case 0
+        leftCount = max(leftCount, 1);
+        rightCount = max(rightCount, 1);
+        int ret = 0;
+        if(left != -1) ret += (root->val) * pow(10,leftCount) + left;
+        if(right != -1) ret += (root->val) * pow(10,rightCount) + right;
+        if(left == -1 && right == -1) ret = root->val;
         return ret;
     }
 };

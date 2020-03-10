@@ -4,9 +4,12 @@ using namespace std;
 
 int main() {
 
-    vector<int> pre({1,2,3,4,5,6,7,8});
-    vector<int> in({3,2,4,1,6,7,5,8});
+    TreeNode* root = new TreeNode(1);
+    TreeNode* left = new TreeNode(2);
+    TreeNode* right = new TreeNode(3);
+    root->left = left;
+    root->right = right;
     Solution solution;
-    solution.buildTree(pre, in);
+    solution.sumNumbers(root);
     return 0;
 }
