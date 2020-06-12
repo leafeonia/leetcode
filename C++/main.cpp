@@ -3,13 +3,8 @@ using namespace std;
 
 
 int main() {
-
-    TreeNode* root = new TreeNode(1);
-    TreeNode* left = new TreeNode(2);
-    TreeNode* right = new TreeNode(3);
-    root->left = left;
-    root->right = right;
+    vector<vector<int>> v{{2,4,3},{6,5,2}};
     Solution solution;
-    solution.sumNumbers(root);
+    cout << solution.hasValidPath(v);
     return 0;
 }
