@@ -3,9 +3,8 @@ using namespace std;
 
 
 int main() {
-    vector<vector<char>> v ({{'A','B','C','E'},{'S','F','C','S'}});
     Solution solution;
-    cout << solution.exist(v, "ABFB");
+    cout << solution.movingCount(3,2,17);
 
     return 0;
 }
