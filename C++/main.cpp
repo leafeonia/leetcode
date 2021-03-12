@@ -3,8 +3,9 @@ using namespace std;
 
 
 int main() {
-    vector<vector<int>> v{{2,4,3},{6,5,2}};
+    vector<vector<char>> v ({{'A','B','C','E'},{'S','F','C','S'}});
     Solution solution;
-    cout << solution.hasValidPath(v);
+    cout << solution.exist(v, "ABFB");
+
     return 0;
 }
