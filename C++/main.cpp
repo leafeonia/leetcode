@@ -4,8 +4,8 @@ using namespace std;
 
 int main() {
     Solution solution;
-    vector<int> v{1,5,9,1,5,9};
-    cout << solution.containsNearbyAlmostDuplicate(v,2,3);
+    vector<vector<int>> v{{1,2,2,1},{3,1,2},{1,3,2},{2,4},{3,1,2},{1,3,1,1}};
+    cout << solution.leastBricks(v);
 
     return 0;
 }
