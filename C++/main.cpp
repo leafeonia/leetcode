@@ -4,8 +4,12 @@ using namespace std;
 
 int main() {
     Solution solution;
-    vector<vector<int>> v{{1,2,2,1},{3,1,2},{1,3,2},{2,4},{3,1,2},{1,3,1,1}};
-    cout << solution.leastBricks(v);
+    vector<vector<char>> v{
+            {'o','a','a','n'},{'e','t','a','e'},{'i','h','k','r'},{'i','f','l','v'}
+
+    };
+    vector<string> v2{"oath", "pea", "eat", "rain"};
+    solution.findWords(v, v2);
 
     return 0;
 }
