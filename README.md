@@ -51,6 +51,7 @@
 | 139 | 单词拆分 | 中等 | C++ | 记忆化搜索<br>dp:`dp[i] = true`表示单词的前i位可以用词表表示，若`dp[i]`为`true`且单词的第`i`到`j`位在词表中则`dp[j]`为`true`。 | 2 | 一开始用set只记了成功的情况导致TLE，换成map把成功和失败的子串都记录即可 | |
 | 186 | 翻转字符串里的单词 | 中等 | C++ | 用`vector<string>`储存所有单词，反序输出即可<br>优解：把所有单词原地反序，再把整个序列全部反序，O(1)空间原地算法 | 1 | \ |  |
 | 207 | Course Schedule | 中等 | C++ | 拓扑排序 | 1 | \ | |
+| 210 | Course Schedule II | 中等 | C++ | Topological sort | 1 | \ | |
 | 220 | 存在重复元素III | 中等 | C++ | 双指针法，用set管理双指针内的区间，实现log(n)级别的查找 | 7 | 半年没刷题 复健两行泪 | :star: |
 | 222 | 完全二叉树的节点个数 | 中等 | C++ | 从右往左，如果到最深一层的节点为空则`cnt++`，直至找到第一个在最深一层的非空节点，答案为`2^h - 1 - cnt` | 1 |  | |
 | 236 | 二叉树的最近公共祖先 | 中等 | C++ | 递归，左侧找到点+右侧找到点+自己是所找点 = 2的点即为所求 | 2 | 自己是所找点时，不能立即return，仍然要向下递归 | :star: |
@@ -68,6 +69,7 @@
 | 690 | 员工的重要性 | 简单 | C++ | 先用map整理数据，之后dfs | 1 | \ |  |
 | 708 | 循环有序列表的插入 | 中等 | JS | 先找到循环起点，再从起点出发找合适的插入点 | 4 | 非严格递增<br>JS语法 |  |
 | 722 | 删除注释 | 中等 | C++ | 3种状态：0：正常，1：行注释，2：块注释<br>优解：状态机，每次根据1个字符而非两个改变状态。OJ词法分析器写过一遍了为什么不用这种高级的解法呢 | 6 | 万恶的/*/ | :star: |
+| 802 | Find Eventual Safe States | 中等 | C++ | Method1: Reverse the original graph, then do topological sort to detect cycle<br>Method2: dfs with color, and do not clear the color when returning from recursion. | 2 | naive dfs with color clearance -> tle | :exclamation: |
 | 886 | 可能的二分法 | 中等 | C++ | 交替染色，如果发现某结点与颜色相同的结点邻接则不能二分 | 3 | 没有考虑非连通图下有区域未染色的情况 | :exclamation::star: |
 | 901 | 股票价格跨度 | 中等 | C++ | 单调栈 | 1 | \ | :exclamation::star: |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
