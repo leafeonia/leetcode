@@ -57,7 +57,9 @@
 | 236 | 二叉树的最近公共祖先 | 中等 | C++ | 递归，左侧找到点+右侧找到点+自己是所找点 = 2的点即为所求 | 2 | 自己是所找点时，不能立即return，仍然要向下递归 | :star: |
 | 270 | 最接近的二叉搜索树值 | 简单 | C++ | 树的遍历，水 | 1 | \ | |
 | 285 | 二叉搜索树中的顺序后继 | 中等 | Java | 中序遍历，但从左孩子返回后判断是否找到了目标节点，若找到则当前节点为目标节点的顺序后继。原因在于二叉搜索树中一个点只有可能是左子树中的某个结点的后继（左边都比他小，右边都比他大） | 4 | 未判断`cur.left != null`，若`cur`为目标节点且直接递归调了用`inorder(cur.left)`，`inorder()`发现`cur.left`是`null`后立即返回，`cur`发现左子树返回且当前状态为已找到目标节点，将`cur`错误设置为答案节点 | :star: |
+| 310 | Minimum Height Trees | 中等 | C++ | find the centre of the graph (no more than 2, contradiction can be used to prove this) by removing all the leaves round by round until no more than 2 nodes left | 1 | \ | :exclamation: |
 | 348 | 判定井字棋胜负 | 中等 | C++ | 每行每列两对角线分别用int标记状态即可 | 3 | `int* a = new int[n]`<br>`sizeof(a) //大错！` |  |
+| 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
 | 510 | 二叉搜索树的中序后继II | 中等 | C++ | 有右孩子则找右子树中最小的，否则向上找到第一个比自己大的父节点 | 1 | \ | |
 | 554 | 砖墙 | 中等 | C++ | 用map统计前缀和数组中出现最多的数 | 2 | 暴力枚举不可取 | |
@@ -68,10 +70,14 @@
 | 672 | 灯泡开关 II | 中等 | C++ | 方法一：第`x`盏灯始终等于第`x+6`盏灯。找出min(n,6)盏灯的m次操作排列数即可。因为操作2次及以上等于操作0或1次，且**进行 A 操作后接 B 操作 和 B 操作后接 A 操作是一样的，所以我们可以假设我们按顺序进行所有操作**。用位运算，遍历0~15即可表示所有可能的操作。将所有合法操作的结果加入set，最后返回set.size()<br>方法二：<br>`light1 = a + b + d`<br/>    `light2 = a + c`<br/>    `light3 = a + b`<br/>    `light4 = a + c + d = light2 + light1 - light3`<br/>    `light5 = a + b = light3`<br/>    `light6 = a + c = light2`<br/>    `light7 = a + b + d = light1`<br>由此可见排列数实际上等于前三盏灯的排列数。考虑min(n,3)的排列数即可。可以直接手动模拟出所有结果。 | 1 | \ | :exclamation::star: |
 | 690 | 员工的重要性 | 简单 | C++ | 先用map整理数据，之后dfs | 1 | \ |  |
 | 708 | 循环有序列表的插入 | 中等 | JS | 先找到循环起点，再从起点出发找合适的插入点 | 4 | 非严格递增<br>JS语法 |  |
+| 721 | Accounts Merge | 中等 | C++ | union find, merge id of emails, not user | 3 | TLE, merged users by union find | :exclamation: |
 | 722 | 删除注释 | 中等 | C++ | 3种状态：0：正常，1：行注释，2：块注释<br>优解：状态机，每次根据1个字符而非两个改变状态。OJ词法分析器写过一遍了为什么不用这种高级的解法呢 | 6 | 万恶的/*/ | :star: |
 | 802 | Find Eventual Safe States | 中等 | C++ | Method1: Reverse the original graph, then do topological sort to detect cycle<br>Method2: dfs with color, and do not clear the color when returning from recursion. | 2 | naive dfs with color clearance -> tle | :exclamation: |
+| 839 | Similar String Groups | 困难 | C++ | union find | 2 | bug in checking whether 2 strings are swapable |  |
 | 886 | 可能的二分法 | 中等 | C++ | 交替染色，如果发现某结点与颜色相同的结点邻接则不能二分 | 3 | 没有考虑非连通图下有区域未染色的情况 | :exclamation::star: |
 | 901 | 股票价格跨度 | 中等 | C++ | 单调栈 | 1 | \ | :exclamation::star: |
+| 952 | Largest Component Size by Common Factor | 困难 | C++ | use union find to merge every number with all its factors | 1 | \ | :exclamation: |
+| 990 | Satisfiability of Equality Equations | 中等 | C++ | union find | 1 | \ |  |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
 | 1053 | 交换一次的先前排列 | 中等 | C++ | 从右向左找第一个比右边任意一个大的数，并且把他右边最大的一个和他交换 | 2 | 正序改逆序忘了改for循环的0 | :star: |
 | 1093 | 大样本统计 | 中等 | C++ | 简单统计，水 | 1 | \ |  |
