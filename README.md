@@ -23,6 +23,7 @@
 | 36 | 有效的数独 | 中等 | Java | 暴力，对所有行、所有列、所有九宫格分别检测(扫描243次)<br>优解：所有格子只遍历一次，根据`i`，`j`得出对应`row`、`column`、`block`的值，并判断这个值在上述三项的`Hashmap`中是否出现过(扫描81次) | 1 | \ |  |
 | 39 | 组合总和 | 中等 | C++ | dp不可行（会出现重复情况）<br>用dfs：每次对当前下标对应的数字选0到最多个，然后下标++，target减去此处加上的总值，继续dfs，如果target为0则将vector加入答案中。因为下标递进且输入数组中数字各不相同，所以不可能重复 | 1 | \ | :star: |
 | 40 | 组合总和II | 中等 | C++ | 与上一题区别在于输入数组中给出了各个数字的个数。关键在于避免重复，允许出现1->2->2->3，但不允许出现3<-2<-1->2->3.这就要求若扫描到与前一个数重复的数字，且该数字不是当前递归层的第一个可选数字，则放弃dfs该数。<br>1 \| 2 2，则第二个2不可选<br>1 2\|2，则第二个2可选 | 1 | \ | :star: |
+| 42 | Trapping Rain Water | 中等 | C++ | Iterate through columns. For each column, add `leftMax - height[i]` or `rightMax - height[i]` to `ans`, depending on whether `height[left] > height[right]`. Two pointers `left` and `right` are always on peak columns until another pointer moves on and surpasses it. | 2 | empty input | :star: |
 | 46 | 全排列 | 中等 | Java | ~~用C++的`next_permutation`秒杀~~将已排列的部分递增，未排列的部分递减，递归即可。<br>优解：实现时，不必每次都传入新的已排列`List`和未排列`List`，只需要用`index`标记已排列和未排列区域的分界即可，使用`swap`将未排列区域的值交换到已排列区域，全程只需要一个`List`。 | 1 | \ | |
 | 48 | 旋转图像 | 中等 | Java | 四条边上依次取一个对应位置进行顺序交换，只需O(1)存储空间存储第一个值，三变量交换的扩展<br>优解：将矩阵转置后左右对称交换，复杂度均为O(N^2)但思路与实现都更简单 | 2 | 下标表达式写错 | |
 | 49 | 字母异位词分组 | 中等 | Java | 维护一个`Hashmap<String, List>`，以排序后的String作为key，将未排序的key加入value的List即可。对熟悉Hashmap基本操作很有帮助。 | 1 | \ | |
@@ -61,6 +62,8 @@
 | 348 | 判定井字棋胜负 | 中等 | C++ | 每行每列两对角线分别用int标记状态即可 | 3 | `int* a = new int[n]`<br>`sizeof(a) //大错！` |  |
 | 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
+| 496 | Next Greater Element I | 简单 | C++ | monotone stack | 1 | \ | |
+| 503 | Next Greater Element II | 中等 | C++ | monotone stack, the content in stack is index, not value. use `% n` to realize circulation | 1 | \ | |
 | 510 | 二叉搜索树的中序后继II | 中等 | C++ | 有右孩子则找右子树中最小的，否则向上找到第一个比自己大的父节点 | 1 | \ | |
 | 554 | 砖墙 | 中等 | C++ | 用map统计前缀和数组中出现最多的数 | 2 | 暴力枚举不可取 | |
 | 591 | 标签验证器 | 困难 | C++ | 根据字符切换`begin`,`normal`,`tag_start`,`tag_end`,`CDATA`五个状态，用栈存储遇到的tag | 3 | 1. 缺了开头结尾的tag，直接CDATA<br>2. <\<A>\</A>的第二个`<` | |
@@ -81,6 +84,7 @@
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
 | 1053 | 交换一次的先前排列 | 中等 | C++ | 从右向左找第一个比右边任意一个大的数，并且把他右边最大的一个和他交换 | 2 | 正序改逆序忘了改for循环的0 | :star: |
 | 1093 | 大样本统计 | 中等 | C++ | 简单统计，水 | 1 | \ |  |
+| 1130 | Minimum Cost Tree From Leaf Values | 中等 | C++ | search with memorization<br>optimal solution: monotone stack | 1 | \ | |
 | 1131 | 绝对值表达式的最大值 | 中等 | Java | 把表达式`\|arr1[i] - arr1[j]\| + \|arr2[i] - arr2[j]\| + \|i-j\|`看成三位曼哈顿距离的特例，在`{1,1,1},{1,1,-1},{1,-1,1},{1,-1,-1}`四个方向上找最大、最小值，求差，最大的差值即为解 | 1 | \ | :exclamation::star: |
 | 1202 | Smallest String With Swaps | 中等 | C++ | 用并查集合并连通分量，之后把每个连通分量中的字符存储在vector中并排序，最后遍历下标`i`，把`s[i]`更新为`findSet(i).back()`后`pop_back()`掉vector末字典序最小的字符 | 1 | \ | :exclamation: |
 | 1391 | 检查网格中是否存在有效路径 | 中等 | C++ | dfs，每个位置有两种可能的搜索方向，要根据到来的方向选择其中之一 | 2 | 即使到了终点，进入方向对才是对 |  |
