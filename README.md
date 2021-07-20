@@ -77,8 +77,10 @@
 | 722 | 删除注释 | 中等 | C++ | 3种状态：0：正常，1：行注释，2：块注释<br>优解：状态机，每次根据1个字符而非两个改变状态。OJ词法分析器写过一遍了为什么不用这种高级的解法呢 | 6 | 万恶的/*/ | :star: |
 | 802 | Find Eventual Safe States | 中等 | C++ | Method1: Reverse the original graph, then do topological sort to detect cycle<br>Method2: dfs with color, and do not clear the color when returning from recursion. | 2 | naive dfs with color clearance -> tle | :exclamation: |
 | 839 | Similar String Groups | 困难 | C++ | union find | 2 | bug in checking whether 2 strings are swapable |  |
+| 856 | Score of Parentheses | 中等 | C++ | Using stack, when `)` is met,`a = s.pop(), b = s.pop(), s.push_back(b + max(1, 2 * a)) `<br>optimal solution: when `()` is detected, add `pow(2, depth)` to answer | 1 | \ | |
 | 886 | 可能的二分法 | 中等 | C++ | 交替染色，如果发现某结点与颜色相同的结点邻接则不能二分 | 3 | 没有考虑非连通图下有区域未染色的情况 | :exclamation::star: |
 | 901 | 股票价格跨度 | 中等 | C++ | 单调栈 | 1 | \ | :exclamation::star: |
+| 907 | Sum of Subarray Minimums | 中等 | C++ | use monotone stacks to find the left boundry and right boundry among which arr[i] is the smallest, then `ans += arr[i] * (i - left) * (right - i)`.  Notice that for contiguous same elements, only count the range in one direction | 4 | mod 1e9+7 |  |
 | 952 | Largest Component Size by Common Factor | 困难 | C++ | use union find to merge every number with all its factors | 1 | \ | :exclamation: |
 | 990 | Satisfiability of Equality Equations | 中等 | C++ | union find | 1 | \ |  |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
