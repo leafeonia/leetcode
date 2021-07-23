@@ -23,6 +23,7 @@
 | 36 | 有效的数独 | 中等 | Java | 暴力，对所有行、所有列、所有九宫格分别检测(扫描243次)<br>优解：所有格子只遍历一次，根据`i`，`j`得出对应`row`、`column`、`block`的值，并判断这个值在上述三项的`Hashmap`中是否出现过(扫描81次) | 1 | \ |  |
 | 39 | 组合总和 | 中等 | C++ | dp不可行（会出现重复情况）<br>用dfs：每次对当前下标对应的数字选0到最多个，然后下标++，target减去此处加上的总值，继续dfs，如果target为0则将vector加入答案中。因为下标递进且输入数组中数字各不相同，所以不可能重复 | 1 | \ | :star: |
 | 40 | 组合总和II | 中等 | C++ | 与上一题区别在于输入数组中给出了各个数字的个数。关键在于避免重复，允许出现1->2->2->3，但不允许出现3<-2<-1->2->3.这就要求若扫描到与前一个数重复的数字，且该数字不是当前递归层的第一个可选数字，则放弃dfs该数。<br>1 \| 2 2，则第二个2不可选<br>1 2\|2，则第二个2可选 | 1 | \ | :star: |
+| 41 | First Missing Positive | 困难 | C++ | The answer could only be integers in [1, n+1]. For every number `i` in this range, swap it to index `i - 1`. Finally, find the first position such that `nums[pos] != pos + 1` and return `pos + 1`. | 1 | \ | :exclamation::star: |
 | 42 | Trapping Rain Water | 中等 | C++ | Iterate through columns. For each column, add `leftMax - height[i]` or `rightMax - height[i]` to `ans`, depending on whether `height[left] > height[right]`. Two pointers `left` and `right` are always on peak columns until another pointer moves on and surpasses it. | 2 | empty input | :star: |
 | 46 | 全排列 | 中等 | Java | ~~用C++的`next_permutation`秒杀~~将已排列的部分递增，未排列的部分递减，递归即可。<br>优解：实现时，不必每次都传入新的已排列`List`和未排列`List`，只需要用`index`标记已排列和未排列区域的分界即可，使用`swap`将未排列区域的值交换到已排列区域，全程只需要一个`List`。 | 1 | \ | |
 | 48 | 旋转图像 | 中等 | Java | 四条边上依次取一个对应位置进行顺序交换，只需O(1)存储空间存储第一个值，三变量交换的扩展<br>优解：将矩阵转置后左右对称交换，复杂度均为O(N^2)但思路与实现都更简单 | 2 | 下标表达式写错 | |
@@ -56,16 +57,19 @@
 | 220 | 存在重复元素III | 中等 | C++ | 双指针法，用set管理双指针内的区间，实现log(n)级别的查找 | 7 | 半年没刷题 复健两行泪 | :star: |
 | 222 | 完全二叉树的节点个数 | 中等 | C++ | 从右往左，如果到最深一层的节点为空则`cnt++`，直至找到第一个在最深一层的非空节点，答案为`2^h - 1 - cnt` | 1 |  | |
 | 236 | 二叉树的最近公共祖先 | 中等 | C++ | 递归，左侧找到点+右侧找到点+自己是所找点 = 2的点即为所求 | 2 | 自己是所找点时，不能立即return，仍然要向下递归 | :star: |
+| 238 | Product of Array Except Self | 中等 | C++ | From left to right producting nums one by one to fill the `ans` with left side product. Then track the right side product from right to left by a single variable, and multiply it with elements in `ans` to get the product of both sides. O(1) space | 1 | \ |  |
 | 270 | 最接近的二叉搜索树值 | 简单 | C++ | 树的遍历，水 | 1 | \ | |
 | 285 | 二叉搜索树中的顺序后继 | 中等 | Java | 中序遍历，但从左孩子返回后判断是否找到了目标节点，若找到则当前节点为目标节点的顺序后继。原因在于二叉搜索树中一个点只有可能是左子树中的某个结点的后继（左边都比他小，右边都比他大） | 4 | 未判断`cur.left != null`，若`cur`为目标节点且直接递归调了用`inorder(cur.left)`，`inorder()`发现`cur.left`是`null`后立即返回，`cur`发现左子树返回且当前状态为已找到目标节点，将`cur`错误设置为答案节点 | :star: |
 | 310 | Minimum Height Trees | 中等 | C++ | find the centre of the graph (no more than 2, contradiction can be used to prove this) by removing all the leaves round by round until no more than 2 nodes left | 1 | \ | :exclamation: |
 | 348 | 判定井字棋胜负 | 中等 | C++ | 每行每列两对角线分别用int标记状态即可 | 3 | `int* a = new int[n]`<br>`sizeof(a) //大错！` |  |
 | 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
+| 457 | Circular Array Loop | 中等 | C++ | fast and slow pointer, use `((i + nums[i]) % n + n) % n` to simulate circle | 4 | 1. (num%n+n)%n<br>2. Check sign for next pointer, not slow, because some invalid signs can only be met by fast pointer | :star: |
 | 496 | Next Greater Element I | 简单 | C++ | monotone stack | 1 | \ | |
 | 503 | Next Greater Element II | 中等 | C++ | monotone stack, the content in stack is index, not value. use `% n` to realize circulation | 1 | \ | |
 | 510 | 二叉搜索树的中序后继II | 中等 | C++ | 有右孩子则找右子树中最小的，否则向上找到第一个比自己大的父节点 | 1 | \ | |
 | 554 | 砖墙 | 中等 | C++ | 用map统计前缀和数组中出现最多的数 | 2 | 暴力枚举不可取 | |
+| 581 | Shortest Unsorted Continuous Subarray | 中等 | C++ | find `right` - the index of the rightmost element which is smaller than the max value of its left elements, as well as `left`. Return `right - left + 1`. | 1 | \ | |
 | 591 | 标签验证器 | 困难 | C++ | 根据字符切换`begin`,`normal`,`tag_start`,`tag_end`,`CDATA`五个状态，用栈存储遇到的tag | 3 | 1. 缺了开头结尾的tag，直接CDATA<br>2. <\<A>\</A>的第二个`<` | |
 | 631 | 设计Excel求和公式 | 困难 | C++ | 把公式存起来，每次获取值之前计算所有的公式把值更新 | 3 | 用值覆盖公式时要将当前位置存储的公式删掉 | |
 | 633 | 平方数之和 | 中等 | C++ | a从0遍历到$\sqrt c$，判断$c - a^2$是不是平方数 | 1 | \ | |
@@ -75,6 +79,7 @@
 | 708 | 循环有序列表的插入 | 中等 | JS | 先找到循环起点，再从起点出发找合适的插入点 | 4 | 非严格递增<br>JS语法 |  |
 | 721 | Accounts Merge | 中等 | C++ | union find, merge id of emails, not user | 3 | TLE, merged users by union find | :exclamation: |
 | 722 | 删除注释 | 中等 | C++ | 3种状态：0：正常，1：行注释，2：块注释<br>优解：状态机，每次根据1个字符而非两个改变状态。OJ词法分析器写过一遍了为什么不用这种高级的解法呢 | 6 | 万恶的/*/ | :star: |
+| 792 | Number of Matching Subsequences | 中等 | C++ | Iterate through `s` only once to avoid TLE. Store all words in 26 buckets according to the first character.  For every char of `s`, move forward the index of words in bucket[ch] and move them to the new bucket according to the new first character. If the index reaches the end of a word, `ans++` | 3 | TLE<br>If use vector as bucket, clear the bucket first then push_back new elements. A better solution uses queue instead. | :star::exclamation: |
 | 802 | Find Eventual Safe States | 中等 | C++ | Method1: Reverse the original graph, then do topological sort to detect cycle<br>Method2: dfs with color, and do not clear the color when returning from recursion. | 2 | naive dfs with color clearance -> tle | :exclamation: |
 | 839 | Similar String Groups | 困难 | C++ | union find | 2 | bug in checking whether 2 strings are swapable |  |
 | 856 | Score of Parentheses | 中等 | C++ | Using stack, when `)` is met,`a = s.pop(), b = s.pop(), s.push_back(b + max(1, 2 * a)) `<br>optimal solution: when `()` is detected, add `pow(2, depth)` to answer | 1 | \ | |
