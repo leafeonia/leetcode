@@ -15,6 +15,7 @@
 | 20 | 有效的括号 | 简单 | C++ | | | | |
 | 21 | 合并两个有序链表 | 简单 | C++ | | | | |
 | 22 | 括号生成 | 中等 | C++ | | | | |
+| 23 | Merge k Sorted Lists | 困难 | C++ | heap | 1 | \ | :star: |
 | 28 | 实现strStr() | 简单 | C++ | | | | |
 | 29 | 两数相除（不使用乘法除法） | 中等 |  Java | 用被除数不断减去除数直至被减数为负（TLE），每次将减数翻倍 | 8 | 边界 | :star: |
 | 31 | 下一个排列 | 中等 | C++ | 找到第一个比右边小的数，与右边比它大的最小的数交换，然后把它右边的数组部分整个翻转 | 3 | 右边存在多个相等的比它大的最小的数时，要取最右边的 |  |
@@ -62,6 +63,8 @@
 | 285 | 二叉搜索树中的顺序后继 | 中等 | Java | 中序遍历，但从左孩子返回后判断是否找到了目标节点，若找到则当前节点为目标节点的顺序后继。原因在于二叉搜索树中一个点只有可能是左子树中的某个结点的后继（左边都比他小，右边都比他大） | 4 | 未判断`cur.left != null`，若`cur`为目标节点且直接递归调了用`inorder(cur.left)`，`inorder()`发现`cur.left`是`null`后立即返回，`cur`发现左子树返回且当前状态为已找到目标节点，将`cur`错误设置为答案节点 | :star: |
 | 310 | Minimum Height Trees | 中等 | C++ | find the centre of the graph (no more than 2, contradiction can be used to prove this) by removing all the leaves round by round until no more than 2 nodes left | 1 | \ | :exclamation: |
 | 348 | 判定井字棋胜负 | 中等 | C++ | 每行每列两对角线分别用int标记状态即可 | 3 | `int* a = new int[n]`<br>`sizeof(a) //大错！` |  |
+| 373 | Find K Pairs with Smallest Sums | 中等 | C++ | View the problem as k-way merge:<br>{nums1[0], nums2[0]}->{nums1[0], nums2[1]}<br>{nums1[1], nums2[0]}->{nums1[1], nums2[0]}<br>{nums1[2], nums2[0]}->{nums1[2], nums2[0]} | 2 | 2 pointers (wrong method) | |
+| 378 | Kth Smallest Element in a Sorted Matrix | 中等 | C++ | K-way merge | 1 | \ | |
 | 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
 | 457 | Circular Array Loop | 中等 | C++ | fast and slow pointer, use `((i + nums[i]) % n + n) % n` to simulate circle | 4 | 1. (num%n+n)%n<br>2. Check sign for next pointer, not slow, because some invalid signs can only be met by fast pointer | :star: |
