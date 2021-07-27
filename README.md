@@ -50,6 +50,7 @@
 | 96 | 不同的二叉搜索树 | 中等 | C++ | 上题dp方法<br>优解：用一维dp数组即可，因为此时求的是所有可能的二叉搜索树的个数，故1,2,3,4组成的二叉搜索树的个数与3,4,5,6相同，都用dp[4]存储即可。 | 1 |  | |
 | 98 | 验证二叉搜索树 | 中等 | C++ | 递归(cur, min, max)<br>妙解：中序遍历，二叉搜索树的中序遍历序列应当严格增 | 3 | long long，请 | |
 | 120 | 三角形最小路径和 | 中等 | C++ | 简单自底向上dp，dp数组只用一维即可 | 1 | \ | |
+| 127 | Word Ladder | 困难 | C++ | bfs | 3 | TLE. Do not search wordList to find next, change characters of current word instead. Takes only (26*WordLength). <br>Remove searched word from wordList instead of using `visited`. TLE->AC | |
 | 129 | 求根到叶子结点数字之和 | 中等 | C++ | 把上层结点的值存在vector里往下传<br>优解：把上层结点的值用一个数字表示往下传即可 | 2 | 一边null一边有子节点 | |
 | 139 | 单词拆分 | 中等 | C++ | 记忆化搜索<br>dp:`dp[i] = true`表示单词的前i位可以用词表表示，若`dp[i]`为`true`且单词的第`i`到`j`位在词表中则`dp[j]`为`true`。 | 2 | 一开始用set只记了成功的情况导致TLE，换成map把成功和失败的子串都记录即可 | |
 | 186 | 翻转字符串里的单词 | 中等 | C++ | 用`vector<string>`储存所有单词，反序输出即可<br>优解：把所有单词原地反序，再把整个序列全部反序，O(1)空间原地算法 | 1 | \ |  |
@@ -59,6 +60,7 @@
 | 222 | 完全二叉树的节点个数 | 中等 | C++ | 从右往左，如果到最深一层的节点为空则`cnt++`，直至找到第一个在最深一层的非空节点，答案为`2^h - 1 - cnt` | 1 |  | |
 | 236 | 二叉树的最近公共祖先 | 中等 | C++ | 递归，左侧找到点+右侧找到点+自己是所找点 = 2的点即为所求 | 2 | 自己是所找点时，不能立即return，仍然要向下递归 | :star: |
 | 238 | Product of Array Except Self | 中等 | C++ | From left to right producting nums one by one to fill the `ans` with left side product. Then track the right side product from right to left by a single variable, and multiply it with elements in `ans` to get the product of both sides. O(1) space | 1 | \ |  |
+| 241 | Different Ways to Add Parentheses | 中等 | C++ | dfs | 1 | \ | |
 | 270 | 最接近的二叉搜索树值 | 简单 | C++ | 树的遍历，水 | 1 | \ | |
 | 285 | 二叉搜索树中的顺序后继 | 中等 | Java | 中序遍历，但从左孩子返回后判断是否找到了目标节点，若找到则当前节点为目标节点的顺序后继。原因在于二叉搜索树中一个点只有可能是左子树中的某个结点的后继（左边都比他小，右边都比他大） | 4 | 未判断`cur.left != null`，若`cur`为目标节点且直接递归调了用`inorder(cur.left)`，`inorder()`发现`cur.left`是`null`后立即返回，`cur`发现左子树返回且当前状态为已找到目标节点，将`cur`错误设置为答案节点 | :star: |
 | 310 | Minimum Height Trees | 中等 | C++ | find the centre of the graph (no more than 2, contradiction can be used to prove this) by removing all the leaves round by round until no more than 2 nodes left | 1 | \ | :exclamation: |
@@ -71,6 +73,7 @@
 | 496 | Next Greater Element I | 简单 | C++ | monotone stack | 1 | \ | |
 | 503 | Next Greater Element II | 中等 | C++ | monotone stack, the content in stack is index, not value. use `% n` to realize circulation | 1 | \ | |
 | 510 | 二叉搜索树的中序后继II | 中等 | C++ | 有右孩子则找右子树中最小的，否则向上找到第一个比自己大的父节点 | 1 | \ | |
+| 542 | 01 Matrix | 中等 | C++ | bfs starting with 0. Dye "1" cells step by step from outer to inner. | 1 | \ | |
 | 554 | 砖墙 | 中等 | C++ | 用map统计前缀和数组中出现最多的数 | 2 | 暴力枚举不可取 | |
 | 581 | Shortest Unsorted Continuous Subarray | 中等 | C++ | find `right` - the index of the rightmost element which is smaller than the max value of its left elements, as well as `left`. Return `right - left + 1`. | 1 | \ | |
 | 591 | 标签验证器 | 困难 | C++ | 根据字符切换`begin`,`normal`,`tag_start`,`tag_end`,`CDATA`五个状态，用栈存储遇到的tag | 3 | 1. 缺了开头结尾的tag，直接CDATA<br>2. <\<A>\</A>的第二个`<` | |
@@ -82,6 +85,7 @@
 | 708 | 循环有序列表的插入 | 中等 | JS | 先找到循环起点，再从起点出发找合适的插入点 | 4 | 非严格递增<br>JS语法 |  |
 | 721 | Accounts Merge | 中等 | C++ | union find, merge id of emails, not user | 3 | TLE, merged users by union find | :exclamation: |
 | 722 | 删除注释 | 中等 | C++ | 3种状态：0：正常，1：行注释，2：块注释<br>优解：状态机，每次根据1个字符而非两个改变状态。OJ词法分析器写过一遍了为什么不用这种高级的解法呢 | 6 | 万恶的/*/ | :star: |
+| 752 | Open the lock | 中等 | C++ | bfs | 1 | \ |  |
 | 792 | Number of Matching Subsequences | 中等 | C++ | Iterate through `s` only once to avoid TLE. Store all words in 26 buckets according to the first character.  For every char of `s`, move forward the index of words in bucket[ch] and move them to the new bucket according to the new first character. If the index reaches the end of a word, `ans++` | 3 | TLE<br>If use vector as bucket, clear the bucket first then push_back new elements. A better solution uses queue instead. | :star::exclamation: |
 | 802 | Find Eventual Safe States | 中等 | C++ | Method1: Reverse the original graph, then do topological sort to detect cycle<br>Method2: dfs with color, and do not clear the color when returning from recursion. | 2 | naive dfs with color clearance -> tle | :exclamation: |
 | 839 | Similar String Groups | 困难 | C++ | union find | 2 | bug in checking whether 2 strings are swapable |  |
