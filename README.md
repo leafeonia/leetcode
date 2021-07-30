@@ -69,7 +69,10 @@
 | 378 | Kth Smallest Element in a Sorted Matrix | 中等 | C++ | K-way merge | 1 | \ | |
 | 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
+| 416 | Partition Equal Subset Sum | 中等 | C++ | find whether 01 knapsack solution exists. | 1 | \ | :exclamation::star: |
 | 457 | Circular Array Loop | 中等 | C++ | fast and slow pointer, use `((i + nums[i]) % n + n) % n` to simulate circle | 4 | 1. (num%n+n)%n<br>2. Check sign for next pointer, not slow, because some invalid signs can only be met by fast pointer | :star: |
+| 474 | Ones and Zeroes | 中等 | C++ | 2d 01 knapsack | 1 | \ |  |
+| 494 | Target Sum | 中等 | C++ | find 01 knapsack solution number. `dp[i]` is the number of solution that the sum of positive numbers is i.  Return dp[(sum + target)/2]<BR>x : sum of all positive numbers<br>x - (sum - x) = target<br>x = (sum + target) / 2 | 1 | \ | :exclamation::star: |
 | 496 | Next Greater Element I | 简单 | C++ | monotone stack | 1 | \ | |
 | 503 | Next Greater Element II | 中等 | C++ | monotone stack, the content in stack is index, not value. use `% n` to realize circulation | 1 | \ | |
 | 510 | 二叉搜索树的中序后继II | 中等 | C++ | 有右孩子则找右子树中最小的，否则向上找到第一个比自己大的父节点 | 1 | \ | |
@@ -96,6 +99,7 @@
 | 952 | Largest Component Size by Common Factor | 困难 | C++ | use union find to merge every number with all its factors | 1 | \ | :exclamation: |
 | 990 | Satisfiability of Equality Equations | 中等 | C++ | union find | 1 | \ |  |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
+| 1049 | Last Stone Weight II | 中等 | C++ | 01 knapsack.  Divide stones to two parts with smallest weight difference, answer = bigWeight - smallWeight = sum - 2 * smallWeight. To find the smallWeight, understand the problem as 01 knapsack with bag weight of sum / 2 and find the maxValue. The weight and value of a stone is the same. | 1 | \ | :exclamation::star: |
 | 1053 | 交换一次的先前排列 | 中等 | C++ | 从右向左找第一个比右边任意一个大的数，并且把他右边最大的一个和他交换 | 2 | 正序改逆序忘了改for循环的0 | :star: |
 | 1093 | 大样本统计 | 中等 | C++ | 简单统计，水 | 1 | \ |  |
 | 1130 | Minimum Cost Tree From Leaf Values | 中等 | C++ | search with memorization<br>optimal solution: monotone stack | 1 | \ | |
