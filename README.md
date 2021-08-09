@@ -30,7 +30,7 @@
 | 48 | 旋转图像 | 中等 | Java | 四条边上依次取一个对应位置进行顺序交换，只需O(1)存储空间存储第一个值，三变量交换的扩展<br>优解：将矩阵转置后左右对称交换，复杂度均为O(N^2)但思路与实现都更简单 | 2 | 下标表达式写错 | |
 | 49 | 字母异位词分组 | 中等 | Java | 维护一个`Hashmap<String, List>`，以排序后的String作为key，将未排序的key加入value的List即可。对熟悉Hashmap基本操作很有帮助。 | 1 | \ | |
 | 50 | Pow(x, n) | 中等 | Java | 快速幂 | 3 | 快速幂写错<br>边界值`Integer.MIN_VALUE`的处理（直接用`long`就好了嘛用什么`int`） | |
-| 53 | 最大子序和 | 简单 | C++ | | | | |
+| 53 | Maximum Subarray | 简单 | C++ | Both greedy and dp work. if sum or dp[i-1] < 0, discard previous result and set sum or dp[i] as nums[i] | 2 | wrong method. (Not prefix sum) | :exclamation: |
 | 54 | 螺旋矩阵 | 中等 | Java | 模拟，用`used`数组标记走过的位置，如果向前一步遇到走过的位置就改变方向 | 2 | 输入`matrix`为空，取`matrix[0].length`爆炸 | |
 | 55 | 跳跃游戏 | 中等 | Java | 数组记录当前该位置是否可达，不可达则`return false`，可达且当前位置加可跳距离越过最后一个位置则`return true` | 1 | \ | |
 | 56 | 合并区间 | 中等 | C++ | | | | |
@@ -55,8 +55,10 @@
 | 129 | 求根到叶子结点数字之和 | 中等 | C++ | 把上层结点的值存在vector里往下传<br>优解：把上层结点的值用一个数字表示往下传即可 | 2 | 一边null一边有子节点 | |
 | 139 | 单词拆分 | 中等 | C++ | 记忆化搜索<br>dp:`dp[i] = true`表示单词的前i位可以用词表表示，若`dp[i]`为`true`且单词的第`i`到`j`位在词表中则`dp[j]`为`true`。 | 2 | 一开始用set只记了成功的情况导致TLE，换成map把成功和失败的子串都记录即可 | |
 | 186 | 翻转字符串里的单词 | 中等 | C++ | 用`vector<string>`储存所有单词，反序输出即可<br>优解：把所有单词原地反序，再把整个序列全部反序，O(1)空间原地算法 | 1 | \ |  |
+| 198 | House Robber | 中等 | C++ | dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]) | 1 | \ | |
 | 207 | Course Schedule | 中等 | C++ | 拓扑排序 | 1 | \ | |
 | 210 | Course Schedule II | 中等 | C++ | Topological sort | 1 | \ | |
+| 213 | House Robber II | 中等 | C++ | ans = max(houseRobber(0, n - 2), houseRobber(1, n - 1)) | 2 | n == 2的情况 | |
 | 220 | 存在重复元素III | 中等 | C++ | 双指针法，用set管理双指针内的区间，实现log(n)级别的查找 | 7 | 半年没刷题 复健两行泪 | :star: |
 | 222 | 完全二叉树的节点个数 | 中等 | C++ | 从右往左，如果到最深一层的节点为空则`cnt++`，直至找到第一个在最深一层的非空节点，答案为`2^h - 1 - cnt` | 1 |  | |
 | 236 | 二叉树的最近公共祖先 | 中等 | C++ | 递归，左侧找到点+右侧找到点+自己是所找点 = 2的点即为所求 | 2 | 自己是所找点时，不能立即return，仍然要向下递归 | :star: |
@@ -64,7 +66,9 @@
 | 241 | Different Ways to Add Parentheses | 中等 | C++ | dfs | 1 | \ | |
 | 270 | 最接近的二叉搜索树值 | 简单 | C++ | 树的遍历，水 | 1 | \ | |
 | 285 | 二叉搜索树中的顺序后继 | 中等 | Java | 中序遍历，但从左孩子返回后判断是否找到了目标节点，若找到则当前节点为目标节点的顺序后继。原因在于二叉搜索树中一个点只有可能是左子树中的某个结点的后继（左边都比他小，右边都比他大） | 4 | 未判断`cur.left != null`，若`cur`为目标节点且直接递归调了用`inorder(cur.left)`，`inorder()`发现`cur.left`是`null`后立即返回，`cur`发现左子树返回且当前状态为已找到目标节点，将`cur`错误设置为答案节点 | :star: |
+| 300 | Longest Increasing Subsequence | 中等 | C++ | for (int j = 0; j < i; j++) dp[i] = max(dp[i], dp[j] + 1)<br>O(NlogN) solution: define vector tails, and tails[i] denotes the minimum tail value for a increasing subsequence with length i+1. If the new element is bigger than the end of tail then push_back it, otherwise find its lower_bound place and replace the original value. The final answer is tails.size() | 2 | the answer is not dp[n-1]! |  |
 | 310 | Minimum Height Trees | 中等 | C++ | find the centre of the graph (no more than 2, contradiction can be used to prove this) by removing all the leaves round by round until no more than 2 nodes left | 1 | \ | :exclamation: |
+| 337 | House Robber III | 中等 | C++ | search with memorization | 2 | ignored max |  |
 | 348 | 判定井字棋胜负 | 中等 | C++ | 每行每列两对角线分别用int标记状态即可 | 3 | `int* a = new int[n]`<br>`sizeof(a) //大错！` |  |
 | 373 | Find K Pairs with Smallest Sums | 中等 | C++ | View the problem as k-way merge:<br>{nums1[0], nums2[0]}->{nums1[0], nums2[1]}<br>{nums1[1], nums2[0]}->{nums1[1], nums2[0]}<br>{nums1[2], nums2[0]}->{nums1[2], nums2[0]} | 2 | 2 pointers (wrong method) | |
 | 378 | Kth Smallest Element in a Sorted Matrix | 中等 | C++ | K-way merge | 1 | \ | |
@@ -87,6 +91,7 @@
 | 672 | 灯泡开关 II | 中等 | C++ | 方法一：第`x`盏灯始终等于第`x+6`盏灯。找出min(n,6)盏灯的m次操作排列数即可。因为操作2次及以上等于操作0或1次，且**进行 A 操作后接 B 操作 和 B 操作后接 A 操作是一样的，所以我们可以假设我们按顺序进行所有操作**。用位运算，遍历0~15即可表示所有可能的操作。将所有合法操作的结果加入set，最后返回set.size()<br>方法二：<br>`light1 = a + b + d`<br/>    `light2 = a + c`<br/>    `light3 = a + b`<br/>    `light4 = a + c + d = light2 + light1 - light3`<br/>    `light5 = a + b = light3`<br/>    `light6 = a + c = light2`<br/>    `light7 = a + b + d = light1`<br>由此可见排列数实际上等于前三盏灯的排列数。考虑min(n,3)的排列数即可。可以直接手动模拟出所有结果。 | 1 | \ | :exclamation::star: |
 | 690 | 员工的重要性 | 简单 | C++ | 先用map整理数据，之后dfs | 1 | \ |  |
 | 708 | 循环有序列表的插入 | 中等 | JS | 先找到循环起点，再从起点出发找合适的插入点 | 4 | 非严格递增<br>JS语法 |  |
+| 718 | Maximum Length of Repeated Subarray | 中等 | C++ | if (nums1[i - 1] == nums2[j - 1]) dp\[i][j] = dp\[i - 1][j - 1]+1<br>reduce memory to O(N): <br>if (nums1[i - 1] == nums2[j - 1]) dp[j] = dp[j - 1]+1<br>**else dp[j] = 0**<br>iterate in reverse order<br>return maxvalue, not dp\[m][n] | 2 | else dp[j] = 0 | :exclamation::star: |
 | 721 | Accounts Merge | 中等 | C++ | union find, merge id of emails, not user | 3 | TLE, merged users by union find | :exclamation: |
 | 722 | 删除注释 | 中等 | C++ | 3种状态：0：正常，1：行注释，2：块注释<br>优解：状态机，每次根据1个字符而非两个改变状态。OJ词法分析器写过一遍了为什么不用这种高级的解法呢 | 6 | 万恶的/*/ | :star: |
 | 752 | Open the lock | 中等 | C++ | bfs | 1 | \ |  |
@@ -100,11 +105,13 @@
 | 952 | Largest Component Size by Common Factor | 困难 | C++ | use union find to merge every number with all its factors | 1 | \ | :exclamation: |
 | 990 | Satisfiability of Equality Equations | 中等 | C++ | union find | 1 | \ |  |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
+| 1035 | Uncrossed Lines | 中等 | C++ | The same as 1143 Longest Common Subsequence | 1 | \ | |
 | 1049 | Last Stone Weight II | 中等 | C++ | 01 knapsack.  Divide stones to two parts with smallest weight difference, answer = bigWeight - smallWeight = sum - 2 * smallWeight. To find the smallWeight, understand the problem as 01 knapsack with bag weight of sum / 2 and find the maxValue. The weight and value of a stone is the same. | 1 | \ | :exclamation::star: |
 | 1053 | 交换一次的先前排列 | 中等 | C++ | 从右向左找第一个比右边任意一个大的数，并且把他右边最大的一个和他交换 | 2 | 正序改逆序忘了改for循环的0 | :star: |
 | 1093 | 大样本统计 | 中等 | C++ | 简单统计，水 | 1 | \ |  |
 | 1130 | Minimum Cost Tree From Leaf Values | 中等 | C++ | search with memorization<br>optimal solution: monotone stack | 1 | \ | |
 | 1131 | 绝对值表达式的最大值 | 中等 | Java | 把表达式`\|arr1[i] - arr1[j]\| + \|arr2[i] - arr2[j]\| + \|i-j\|`看成三位曼哈顿距离的特例，在`{1,1,1},{1,1,-1},{1,-1,1},{1,-1,-1}`四个方向上找最大、最小值，求差，最大的差值即为解 | 1 | \ | :exclamation::star: |
+| 1143 | Longest Common Subsequence | 中等 | C++ | if (text1[i - 1] == text2[j - 1])  dp\[i][j] = dp\[i - 1][j - 1] + 1<br>  else dp\[i][j] = max(dp\[i][j - 1], dp\[i - 1][j]) | 2 | cannot directly use 1d array to optimize memory usage (have to add another variable to track dp\[i-1][j-1] if you want) | :star: |
 | 1202 | Smallest String With Swaps | 中等 | C++ | 用并查集合并连通分量，之后把每个连通分量中的字符存储在vector中并排序，最后遍历下标`i`，把`s[i]`更新为`findSet(i).back()`后`pop_back()`掉vector末字典序最小的字符 | 1 | \ | :exclamation: |
 | 1391 | 检查网格中是否存在有效路径 | 中等 | C++ | dfs，每个位置有两种可能的搜索方向，要根据到来的方向选择其中之一 | 2 | 即使到了终点，进入方向对才是对 |  |
 | 1734 | 解码异或后的排列 | 中等 | C++ | 将encoded数组除第一项之外每隔一项进行异或，得到$p[1]$^ $p[2]$^...^$p[n-1]$，由题目条件可计算$p[0]$^ $p[1]$^...^$p[n-1]$，两者异或得$p[0]$，之后传导求解 | 1 | \ | :question: |
