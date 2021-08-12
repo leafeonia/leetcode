@@ -37,6 +37,7 @@
 | 62 | 不同路径 | 中等 | C++ | | | | |
 | 64 | 最小路径和 | 中等 | C++ | 简单dp，注意可以inplace | 2 | 局部变量没初始化低级错误 | |
 | 70 | 爬楼梯 | 简单 | python | 简单dp，`dp[n] = dp[n-1] + dp[n-2]`，因为只用记录两个状态所以实际上不用dp数组 | 1 | \ | |
+| 72 | edit distance | 困难 | C++ | if (word1\[i - 1] == word2\[j - 1]) dp\[i][j] = dp\[i - 1][j - 1]<br>else dp\[i][j] = min(dp\[i - 1][j] /\*add after word1\*/, dp\[i][j - 1] /\*add after word2\*/, dp\[i - 1][j - 1] /\*replace last element of word1\*/) + 1 | 1 | \ | :exclamation::star: |
 | 73 | 矩阵置零 | 中等 | python | 用两个数组记录每一列或每一行是否要清零（空间O(m+n)）<br>如果该行或该列要清零，则把该行或该列的第一个元素置零（第一行第一列需特殊标记），最后根据第一行第一列是否为0选择是否置零该行或该列（空间O(1)） | 1 | \ | |
 | 74 | 搜索二维矩阵 | 中等 | C++ | 从右往左，若该列第1个值比target值大则继续向左，否则向下找(剑指offer面试题4) | 2 | 边界 | |
 | 75 | 颜色分类 | 中等 | python | 荷兰国旗问题，用两个指针`left`、`right`标记0的右边界和2的左边界 | 2 | 扫描到2，将`nums[right]`与当前位置元素交换后，当前位置的下标不应该加1，而是保持不变，因为从`nums[right]`交换过来的元素可能还需要被再次交换 | :exclamation::star: |
@@ -50,6 +51,7 @@
 | 95 | 不同的二叉搜索树II | 中等 | C++ | dp,`dp[i][j]`存储包含从`i`到`j`的所有二叉搜索树的根节点，所有子树从小到大拼到最大的二叉树 | 2 | n=0 | |
 | 96 | 不同的二叉搜索树 | 中等 | C++ | 上题dp方法<br>优解：用一维dp数组即可，因为此时求的是所有可能的二叉搜索树的个数，故1,2,3,4组成的二叉搜索树的个数与3,4,5,6相同，都用dp[4]存储即可。 | 1 |  | |
 | 98 | 验证二叉搜索树 | 中等 | C++ | 递归(cur, min, max)<br>妙解：中序遍历，二叉搜索树的中序遍历序列应当严格增 | 3 | long long，请 | |
+| 115 | Distinct Subsequences | 困难 | C++ | dp\[i][j] = dp\[i][j - 1]<br>if (t[i - 1] == s[j - 1]) dp\[i][j] += dp\[i - 1][j - 1]<br>for (int j = 0; j <= s.length(); j++) dp\[0][j] = 1 | 2 | long long，请 | |
 | 120 | 三角形最小路径和 | 中等 | C++ | 简单自底向上dp，dp数组只用一维即可 | 1 | \ | |
 | 127 | Word Ladder | 困难 | C++ | bfs | 3 | TLE. Do not search wordList to find next, change characters of current word instead. Takes only (26*WordLength). <br>Remove searched word from wordList instead of using `visited`. TLE->AC | |
 | 129 | 求根到叶子结点数字之和 | 中等 | C++ | 把上层结点的值存在vector里往下传<br>优解：把上层结点的值用一个数字表示往下传即可 | 2 | 一边null一边有子节点 | |
@@ -81,12 +83,15 @@
 | 496 | Next Greater Element I | 简单 | C++ | monotone stack | 1 | \ | |
 | 503 | Next Greater Element II | 中等 | C++ | monotone stack, the content in stack is index, not value. use `% n` to realize circulation | 1 | \ | |
 | 510 | 二叉搜索树的中序后继II | 中等 | C++ | 有右孩子则找右子树中最小的，否则向上找到第一个比自己大的父节点 | 1 | \ | |
+| 516 | Longest Palindromic Subsequence | 中等 | C++ | if (s[i] == s[j]) dp\[i][j] = dp\[i + 1][j - 1] + 2;<br/>else dp\[i][j] = max(dp\[i + 1][j], dp\[i][j - 1]); | 1 | \ | |
 | 542 | 01 Matrix | 中等 | C++ | bfs starting with 0. Dye "1" cells step by step from outer to inner. | 1 | \ | |
 | 554 | 砖墙 | 中等 | C++ | 用map统计前缀和数组中出现最多的数 | 2 | 暴力枚举不可取 | |
 | 581 | Shortest Unsorted Continuous Subarray | 中等 | C++ | find `right` - the index of the rightmost element which is smaller than the max value of its left elements, as well as `left`. Return `right - left + 1`. | 1 | \ | |
+| 583 | Delete Operation for Two Strings | 中等 | C++ | word1.length() + word2.length() - 2 * longest common subsequence(word1, word2) | 1 | \ | |
 | 591 | 标签验证器 | 困难 | C++ | 根据字符切换`begin`,`normal`,`tag_start`,`tag_end`,`CDATA`五个状态，用栈存储遇到的tag | 3 | 1. 缺了开头结尾的tag，直接CDATA<br>2. <\<A>\</A>的第二个`<` | |
 | 631 | 设计Excel求和公式 | 困难 | C++ | 把公式存起来，每次获取值之前计算所有的公式把值更新 | 3 | 用值覆盖公式时要将当前位置存储的公式删掉 | |
 | 633 | 平方数之和 | 中等 | C++ | a从0遍历到$\sqrt c$，判断$c - a^2$是不是平方数 | 1 | \ | |
+| 647 | Palindromic Substrings | 中等 | C++ | expand possible centers. Note that string with length n has 2n - 1 centers. (Consider: "aa")<br>if using dp, dp\[i][j] is a boolean value denoting whether s[i .. j] is palindrome | 1 | \ | |
 | 651 | 4键键盘 | 中等 | C++ | dp。就用O(N^2)的方法，别把问题想太复杂。 | 3 | 只考虑了比较`dp[i-1] + (dp[i-1] - dp[i-2])`和`2*dp[i-3]`，实际上优解可能为`3*dp[i-4]`等 |  |
 | 672 | 灯泡开关 II | 中等 | C++ | 方法一：第`x`盏灯始终等于第`x+6`盏灯。找出min(n,6)盏灯的m次操作排列数即可。因为操作2次及以上等于操作0或1次，且**进行 A 操作后接 B 操作 和 B 操作后接 A 操作是一样的，所以我们可以假设我们按顺序进行所有操作**。用位运算，遍历0~15即可表示所有可能的操作。将所有合法操作的结果加入set，最后返回set.size()<br>方法二：<br>`light1 = a + b + d`<br/>    `light2 = a + c`<br/>    `light3 = a + b`<br/>    `light4 = a + c + d = light2 + light1 - light3`<br/>    `light5 = a + b = light3`<br/>    `light6 = a + c = light2`<br/>    `light7 = a + b + d = light1`<br>由此可见排列数实际上等于前三盏灯的排列数。考虑min(n,3)的排列数即可。可以直接手动模拟出所有结果。 | 1 | \ | :exclamation::star: |
 | 690 | 员工的重要性 | 简单 | C++ | 先用map整理数据，之后dfs | 1 | \ |  |
