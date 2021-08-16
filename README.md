@@ -51,6 +51,7 @@
 | 95 | 不同的二叉搜索树II | 中等 | C++ | dp,`dp[i][j]`存储包含从`i`到`j`的所有二叉搜索树的根节点，所有子树从小到大拼到最大的二叉树 | 2 | n=0 | |
 | 96 | 不同的二叉搜索树 | 中等 | C++ | 上题dp方法<br>优解：用一维dp数组即可，因为此时求的是所有可能的二叉搜索树的个数，故1,2,3,4组成的二叉搜索树的个数与3,4,5,6相同，都用dp[4]存储即可。 | 1 |  | |
 | 98 | 验证二叉搜索树 | 中等 | C++ | 递归(cur, min, max)<br>妙解：中序遍历，二叉搜索树的中序遍历序列应当严格增 | 3 | long long，请 | |
+| 99 | Recover Binary Search Tree | 中等 | C++ | inorder traverse the BST along with recording the previous treenode. For the first time if prev->val > root->val then `big = prev; small = root`(1,3,2,4). For the second time set `small = root`(1,2,6,4,3,5). Swap value of big and small. | 3 | Finding only small is not enough | :exclamation: |
 | 115 | Distinct Subsequences | 困难 | C++ | dp\[i][j] = dp\[i][j - 1]<br>if (t[i - 1] == s[j - 1]) dp\[i][j] += dp\[i - 1][j - 1]<br>for (int j = 0; j <= s.length(); j++) dp\[0][j] = 1 | 2 | long long，请 | |
 | 120 | 三角形最小路径和 | 中等 | C++ | 简单自底向上dp，dp数组只用一维即可 | 1 | \ | |
 | 127 | Word Ladder | 困难 | C++ | bfs | 3 | TLE. Do not search wordList to find next, change characters of current word instead. Takes only (26*WordLength). <br>Remove searched word from wordList instead of using `visited`. TLE->AC | |
@@ -81,6 +82,7 @@
 | 474 | Ones and Zeroes | 中等 | C++ | 2d 01 knapsack | 1 | \ |  |
 | 494 | Target Sum | 中等 | C++ | find 01 knapsack solution number. `dp[i]` is the number of solution that the sum of positive numbers is i.  Return dp[(sum + target)/2]<BR>x : sum of all positive numbers<br>x - (sum - x) = target<br>x = (sum + target) / 2 | 1 | \ | :exclamation::star: |
 | 496 | Next Greater Element I | 简单 | C++ | monotone stack | 1 | \ | |
+| 501 | Find Mode in Binary Search Tree | 简单 | C++ | solution with O(1) space: use in-order traverse because the tree is a BST, the traversed list will be sorted. So we can count the times a number appears without additional space. If the time count is greater than current record, then clear the ans vector and push_back it, along with updating the record. | 1 | \ | |
 | 503 | Next Greater Element II | 中等 | C++ | monotone stack, the content in stack is index, not value. use `% n` to realize circulation | 1 | \ | |
 | 510 | 二叉搜索树的中序后继II | 中等 | C++ | 有右孩子则找右子树中最小的，否则向上找到第一个比自己大的父节点 | 1 | \ | |
 | 516 | Longest Palindromic Subsequence | 中等 | C++ | if (s[i] == s[j]) dp\[i][j] = dp\[i + 1][j - 1] + 2;<br/>else dp\[i][j] = max(dp\[i + 1][j], dp\[i][j - 1]); | 1 | \ | |
