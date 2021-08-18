@@ -75,6 +75,7 @@
 | 348 | 判定井字棋胜负 | 中等 | C++ | 每行每列两对角线分别用int标记状态即可 | 3 | `int* a = new int[n]`<br>`sizeof(a) //大错！` |  |
 | 373 | Find K Pairs with Smallest Sums | 中等 | C++ | View the problem as k-way merge:<br>{nums1[0], nums2[0]}->{nums1[0], nums2[1]}<br>{nums1[1], nums2[0]}->{nums1[1], nums2[0]}<br>{nums1[2], nums2[0]}->{nums1[2], nums2[0]} | 2 | 2 pointers (wrong method) | |
 | 378 | Kth Smallest Element in a Sorted Matrix | 中等 | C++ | K-way merge | 1 | \ | |
+| 394 | Decode string | 中等 | C++ | Stack or recursion. Recursion solution: for each level, if char is encountered, add it directly to `ret`; if number is encountered, get the number value `num` until meeting '[', then recursively get the value of a deeper level and add it `num` times to `ret`. ']' or end of original string mark the end of current level. Return `ret` to previous level in this case. | 2 | Do not store char value in variable out of stack if using stack. | :star: |
 | 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
 | 416 | Partition Equal Subset Sum | 中等 | C++ | find whether 01 knapsack solution exists. | 1 | \ | :exclamation::star: |
@@ -110,6 +111,7 @@
 | 901 | 股票价格跨度 | 中等 | C++ | 单调栈 | 1 | \ | :exclamation::star: |
 | 907 | Sum of Subarray Minimums | 中等 | C++ | use monotone stacks to find the left boundry and right boundry among which arr[i] is the smallest, then `ans += arr[i] * (i - left) * (right - i)`.  Notice that for contiguous same elements, only count the range in one direction | 4 | mod 1e9+7 |  |
 | 952 | Largest Component Size by Common Factor | 困难 | C++ | use union find to merge every number with all its factors | 1 | \ | :exclamation: |
+| 981 | Time Based Key-Value Store | 中等 | C++ | unordered_map<key, {timestamp, value}> with binary search on timestamp | 1 | \ |  |
 | 990 | Satisfiability of Equality Equations | 中等 | C++ | union find | 1 | \ |  |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
 | 1035 | Uncrossed Lines | 中等 | C++ | The same as 1143 Longest Common Subsequence | 1 | \ | |
