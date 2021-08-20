@@ -102,10 +102,12 @@
 | 718 | Maximum Length of Repeated Subarray | 中等 | C++ | if (nums1[i - 1] == nums2[j - 1]) dp\[i][j] = dp\[i - 1][j - 1]+1<br>reduce memory to O(N): <br>if (nums1[i - 1] == nums2[j - 1]) dp[j] = dp[j - 1]+1<br>**else dp[j] = 0**<br>iterate in reverse order<br>return maxvalue, not dp\[m][n] | 2 | else dp[j] = 0 | :exclamation::star: |
 | 721 | Accounts Merge | 中等 | C++ | union find, merge id of emails, not user | 3 | TLE, merged users by union find | :exclamation: |
 | 722 | 删除注释 | 中等 | C++ | 3种状态：0：正常，1：行注释，2：块注释<br>优解：状态机，每次根据1个字符而非两个改变状态。OJ词法分析器写过一遍了为什么不用这种高级的解法呢 | 6 | 万恶的/*/ | :star: |
+| 735 | Asteroid Collision | 中等 | C++ | using stack. Only handle collision when st.top() > 0 (rightward) && cur < 0 (leftward) | 1 | \ |  |
 | 752 | Open the lock | 中等 | C++ | bfs | 1 | \ |  |
 | 792 | Number of Matching Subsequences | 中等 | C++ | Iterate through `s` only once to avoid TLE. Store all words in 26 buckets according to the first character.  For every char of `s`, move forward the index of words in bucket[ch] and move them to the new bucket according to the new first character. If the index reaches the end of a word, `ans++` | 3 | TLE<br>If use vector as bucket, clear the bucket first then push_back new elements. A better solution uses queue instead. | :star::exclamation: |
 | 802 | Find Eventual Safe States | 中等 | C++ | Method1: Reverse the original graph, then do topological sort to detect cycle<br>Method2: dfs with color, and do not clear the color when returning from recursion. | 2 | naive dfs with color clearance -> tle | :exclamation: |
 | 839 | Similar String Groups | 困难 | C++ | union find | 2 | bug in checking whether 2 strings are swapable |  |
+| 843 | Guess the word | 困难 | C++ | general idea: select a word `w`,  eliminate all the words in wordlist that match(w, word) != master.guess(w)<br>How to select `w`? Since the probability that master.guess(w) = 0 is (25/26)^6 ≈ 0.8, AND we want to eliminate as many words as possible. So we can assume that master.guess(w) returns 0 and select the word `w` as the word that has most matches with other words in wordlist. | 2 | The algorithm never guarantees successful guess. For wordlist {"aaaaaa", "bbbbbb", ..., "zzzzzz"} it is impossible to guess the word in 10 guesses. | :exclamation: |
 | 856 | Score of Parentheses | 中等 | C++ | Using stack, when `)` is met,`a = s.pop(), b = s.pop(), s.push_back(b + max(1, 2 * a)) `<br>optimal solution: when `()` is detected, add `pow(2, depth)` to answer | 1 | \ | |
 | 886 | 可能的二分法 | 中等 | C++ | 交替染色，如果发现某结点与颜色相同的结点邻接则不能二分 | 3 | 没有考虑非连通图下有区域未染色的情况 | :exclamation::star: |
 | 901 | 股票价格跨度 | 中等 | C++ | 单调栈 | 1 | \ | :exclamation::star: |
@@ -115,6 +117,7 @@
 | 990 | Satisfiability of Equality Equations | 中等 | C++ | union find | 1 | \ |  |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
 | 1035 | Uncrossed Lines | 中等 | C++ | The same as 1143 Longest Common Subsequence | 1 | \ | |
+| 1048 | Longest String Chain | 中等 | C++ | sort by length then dp. dp is a map, not vector, which gives a time complexity of O(NlogN) | 1 | \ | |
 | 1049 | Last Stone Weight II | 中等 | C++ | 01 knapsack.  Divide stones to two parts with smallest weight difference, answer = bigWeight - smallWeight = sum - 2 * smallWeight. To find the smallWeight, understand the problem as 01 knapsack with bag weight of sum / 2 and find the maxValue. The weight and value of a stone is the same. | 1 | \ | :exclamation::star: |
 | 1053 | 交换一次的先前排列 | 中等 | C++ | 从右向左找第一个比右边任意一个大的数，并且把他右边最大的一个和他交换 | 2 | 正序改逆序忘了改for循环的0 | :star: |
 | 1093 | 大样本统计 | 中等 | C++ | 简单统计，水 | 1 | \ |  |
@@ -123,6 +126,7 @@
 | 1143 | Longest Common Subsequence | 中等 | C++ | if (text1[i - 1] == text2[j - 1])  dp\[i][j] = dp\[i - 1][j - 1] + 1<br>  else dp\[i][j] = max(dp\[i][j - 1], dp\[i - 1][j]) | 2 | cannot directly use 1d array to optimize memory usage (have to add another variable to track dp\[i-1][j-1] if you want) | :star: |
 | 1202 | Smallest String With Swaps | 中等 | C++ | 用并查集合并连通分量，之后把每个连通分量中的字符存储在vector中并排序，最后遍历下标`i`，把`s[i]`更新为`findSet(i).back()`后`pop_back()`掉vector末字典序最小的字符 | 1 | \ | :exclamation: |
 | 1391 | 检查网格中是否存在有效路径 | 中等 | C++ | dfs，每个位置有两种可能的搜索方向，要根据到来的方向选择其中之一 | 2 | 即使到了终点，进入方向对才是对 |  |
+| 1509 | Minimum Difference Between Largest and Smallest Value in Three Moves | 中等 | C++ | min(nums[n - 4] - nums[0], nums[n - 3] - nums[1], nums[n - 2] - nums[2], nums[n - 1] - nums[3]) (after sorting) | 1 | \ | |
 | 1734 | 解码异或后的排列 | 中等 | C++ | 将encoded数组除第一项之外每隔一项进行异或，得到$p[1]$^ $p[2]$^...^$p[n-1]$，由题目条件可计算$p[0]$^ $p[1]$^...^$p[n-1]$，两者异或得$p[0]$，之后传导求解 | 1 | \ | :question: |
 | offer3 | 数组中重复的数字 | 简单 | C++ | 下标统计，把数字换到以它自身作为下标的位置，如果该位置已有数字相同则重复 | 1 | \ |  |
 | offer4 | 二维数组中的查找 | 简单 | C++ | 线性查找，从右上到左下 | 1 | \ | |
