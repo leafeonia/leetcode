@@ -5,7 +5,7 @@
 | 1 | 两数之和 | 简单 | C++ | | | | |
 | 2 | 两数相加 | 中等 | Java | 优解：当有一个链表到头的时候，用0代替其值 | | | |
 | 3 | 无重复字符的最长子串  | 中等 | Java | | | | |
-| 5 | 最长回文子串 | 中等 | python | | | | |
+| 5 | 最长回文子串 | 中等 | python | 1. expand around center<br>2. dp | 2 | update index instead of answer string, otherwise tle | |
 | 7 | 整数反转 | 简单 | python | | | | |
 | 8 | 字符串转换整数(atoi) | 中等 | C++ | | | | |
 | 11 | 盛最多水的容器 | 中等 | C++ | 双指针法 | | | :star: |
@@ -57,6 +57,7 @@
 | 127 | Word Ladder | 困难 | C++ | bfs | 3 | TLE. Do not search wordList to find next, change characters of current word instead. Takes only (26*WordLength). <br>Remove searched word from wordList instead of using `visited`. TLE->AC | |
 | 129 | 求根到叶子结点数字之和 | 中等 | C++ | 把上层结点的值存在vector里往下传<br>优解：把上层结点的值用一个数字表示往下传即可 | 2 | 一边null一边有子节点 | |
 | 139 | 单词拆分 | 中等 | C++ | 记忆化搜索<br>dp:`dp[i] = true`表示单词的前i位可以用词表表示，若`dp[i]`为`true`且单词的第`i`到`j`位在词表中则`dp[j]`为`true`。 | 2 | 一开始用set只记了成功的情况导致TLE，换成map把成功和失败的子串都记录即可 | |
+| 146 | LRU Cache | 中等 | C++ | unordered_map + double linked list. Use 2 sentinels (head and tail) | 2 | linked list should also be updated after put | :exclamation::star: |
 | 186 | 翻转字符串里的单词 | 中等 | C++ | 用`vector<string>`储存所有单词，反序输出即可<br>优解：把所有单词原地反序，再把整个序列全部反序，O(1)空间原地算法 | 1 | \ |  |
 | 198 | House Robber | 中等 | C++ | dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]) | 1 | \ | |
 | 207 | Course Schedule | 中等 | C++ | 拓扑排序 | 1 | \ | |
@@ -64,9 +65,11 @@
 | 213 | House Robber II | 中等 | C++ | ans = max(houseRobber(0, n - 2), houseRobber(1, n - 1)) | 2 | n == 2的情况 | |
 | 220 | 存在重复元素III | 中等 | C++ | 双指针法，用set管理双指针内的区间，实现log(n)级别的查找 | 7 | 半年没刷题 复健两行泪 | :star: |
 | 222 | 完全二叉树的节点个数 | 中等 | C++ | 从右往左，如果到最深一层的节点为空则`cnt++`，直至找到第一个在最深一层的非空节点，答案为`2^h - 1 - cnt` | 1 |  | |
+| 224 | Basic Calculator | 困难 | C++ | Because only + and - exist in the expression so whenever we meet a number we add it or minus it to the ans. The only thing to do is to set the correct sign. Use stack to store signs. <br>+ : sign = st.top() <br> - : sign = -st.top()<br> ( : st.push(sign)<br>) : st.pop()<br>This logic can handle negative numbers directly. | 1 | \ | :star: |
 | 236 | 二叉树的最近公共祖先 | 中等 | C++ | 递归，左侧找到点+右侧找到点+自己是所找点 = 2的点即为所求 | 2 | 自己是所找点时，不能立即return，仍然要向下递归 | :star: |
 | 238 | Product of Array Except Self | 中等 | C++ | From left to right producting nums one by one to fill the `ans` with left side product. Then track the right side product from right to left by a single variable, and multiply it with elements in `ans` to get the product of both sides. O(1) space | 1 | \ |  |
 | 241 | Different Ways to Add Parentheses | 中等 | C++ | dfs | 1 | \ | |
+| 253 | Meeting Rooms II | 中等 | C++ | Sort the intervals by **start time** (different from merge intervals) and push finish time to a minheap. If current start time >= minheap.top then pop minheap top. Answer is the size of the minheap. | 1 | \ | :star: |
 | 270 | 最接近的二叉搜索树值 | 简单 | C++ | 树的遍历，水 | 1 | \ | |
 | 285 | 二叉搜索树中的顺序后继 | 中等 | Java | 中序遍历，但从左孩子返回后判断是否找到了目标节点，若找到则当前节点为目标节点的顺序后继。原因在于二叉搜索树中一个点只有可能是左子树中的某个结点的后继（左边都比他小，右边都比他大） | 4 | 未判断`cur.left != null`，若`cur`为目标节点且直接递归调了用`inorder(cur.left)`，`inorder()`发现`cur.left`是`null`后立即返回，`cur`发现左子树返回且当前状态为已找到目标节点，将`cur`错误设置为答案节点 | :star: |
 | 300 | Longest Increasing Subsequence | 中等 | C++ | for (int j = 0; j < i; j++) dp[i] = max(dp[i], dp[j] + 1)<br>O(NlogN) solution: define vector tails, and tails[i] denotes the minimum tail value for a increasing subsequence with length i+1. If the new element is bigger than the end of tail then push_back it, otherwise find its lower_bound place and replace the original value. The final answer is tails.size() | 2 | the answer is not dp[n-1]! |  |
@@ -75,6 +78,7 @@
 | 348 | 判定井字棋胜负 | 中等 | C++ | 每行每列两对角线分别用int标记状态即可 | 3 | `int* a = new int[n]`<br>`sizeof(a) //大错！` |  |
 | 373 | Find K Pairs with Smallest Sums | 中等 | C++ | View the problem as k-way merge:<br>{nums1[0], nums2[0]}->{nums1[0], nums2[1]}<br>{nums1[1], nums2[0]}->{nums1[1], nums2[0]}<br>{nums1[2], nums2[0]}->{nums1[2], nums2[0]} | 2 | 2 pointers (wrong method) | |
 | 378 | Kth Smallest Element in a Sorted Matrix | 中等 | C++ | K-way merge | 1 | \ | |
+| 380 | Insert Delete GetRandom O(1) | 中等 | C++ | hashmap + vector. For insert and getrandom, vector can finish them in O(1) naturally. For delete, swap the value to the end of the vector then pop it. To get the index of the value, use a hashmap for O(1) time complexity. | 4 | Update hashmap twice after delete.<br>Do not use srand(time(0)) | :exclamation::star: |
 | 394 | Decode string | 中等 | C++ | Stack or recursion. Recursion solution: for each level, if char is encountered, add it directly to `ret`; if number is encountered, get the number value `num` until meeting '[', then recursively get the value of a deeper level and add it `num` times to `ret`. ']' or end of original string mark the end of current level. Return `ret` to previous level in this case. | 2 | Do not store char value in variable out of stack if using stack. | :star: |
 | 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
@@ -89,6 +93,7 @@
 | 516 | Longest Palindromic Subsequence | 中等 | C++ | if (s[i] == s[j]) dp\[i][j] = dp\[i + 1][j - 1] + 2;<br/>else dp\[i][j] = max(dp\[i + 1][j], dp\[i][j - 1]); | 1 | \ | |
 | 542 | 01 Matrix | 中等 | C++ | bfs starting with 0. Dye "1" cells step by step from outer to inner. | 1 | \ | |
 | 554 | 砖墙 | 中等 | C++ | 用map统计前缀和数组中出现最多的数 | 2 | 暴力枚举不可取 | |
+| 560 | Subarray Sum Equals K | 中等 | C++ | Use a map to record how many times a prefix sum has appeared. Then for each number `n` in the array, add mp[n - k] to the answer. | 1 | \ | :exclamation::star: |
 | 581 | Shortest Unsorted Continuous Subarray | 中等 | C++ | find `right` - the index of the rightmost element which is smaller than the max value of its left elements, as well as `left`. Return `right - left + 1`. | 1 | \ | |
 | 583 | Delete Operation for Two Strings | 中等 | C++ | word1.length() + word2.length() - 2 * longest common subsequence(word1, word2) | 1 | \ | |
 | 591 | 标签验证器 | 困难 | C++ | 根据字符切换`begin`,`normal`,`tag_start`,`tag_end`,`CDATA`五个状态，用栈存储遇到的tag | 3 | 1. 缺了开头结尾的tag，直接CDATA<br>2. <\<A>\</A>的第二个`<` | |
@@ -117,6 +122,7 @@
 | 990 | Satisfiability of Equality Equations | 中等 | C++ | union find | 1 | \ |  |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
 | 1035 | Uncrossed Lines | 中等 | C++ | The same as 1143 Longest Common Subsequence | 1 | \ | |
+| 1041 | Robot Bounded In Circle | 中等 | C++ | After finishing all the instructions, if the robot does not face north then there is a cycle. | 1 | \ | |
 | 1048 | Longest String Chain | 中等 | C++ | sort by length then dp. dp is a map, not vector, which gives a time complexity of O(NlogN) | 1 | \ | |
 | 1049 | Last Stone Weight II | 中等 | C++ | 01 knapsack.  Divide stones to two parts with smallest weight difference, answer = bigWeight - smallWeight = sum - 2 * smallWeight. To find the smallWeight, understand the problem as 01 knapsack with bag weight of sum / 2 and find the maxValue. The weight and value of a stone is the same. | 1 | \ | :exclamation::star: |
 | 1053 | 交换一次的先前排列 | 中等 | C++ | 从右向左找第一个比右边任意一个大的数，并且把他右边最大的一个和他交换 | 2 | 正序改逆序忘了改for循环的0 | :star: |
@@ -125,6 +131,8 @@
 | 1131 | 绝对值表达式的最大值 | 中等 | Java | 把表达式`\|arr1[i] - arr1[j]\| + \|arr2[i] - arr2[j]\| + \|i-j\|`看成三位曼哈顿距离的特例，在`{1,1,1},{1,1,-1},{1,-1,1},{1,-1,-1}`四个方向上找最大、最小值，求差，最大的差值即为解 | 1 | \ | :exclamation::star: |
 | 1143 | Longest Common Subsequence | 中等 | C++ | if (text1[i - 1] == text2[j - 1])  dp\[i][j] = dp\[i - 1][j - 1] + 1<br>  else dp\[i][j] = max(dp\[i][j - 1], dp\[i - 1][j]) | 2 | cannot directly use 1d array to optimize memory usage (have to add another variable to track dp\[i-1][j-1] if you want) | :star: |
 | 1202 | Smallest String With Swaps | 中等 | C++ | 用并查集合并连通分量，之后把每个连通分量中的字符存储在vector中并排序，最后遍历下标`i`，把`s[i]`更新为`findSet(i).back()`后`pop_back()`掉vector末字典序最小的字符 | 1 | \ | :exclamation: |
+| 1249 | Minimum Remove to Make Valid Parentheses | 中等 | C++ | remove invalid ')' first, then remove redundant '(' from right to left | 2 | did not remove redundant '(': ()( |  |
+| 1277 | Count Square Submatrices with All Ones | 中等 | C++ | dp\[i][j] means the size of biggest square with matrix\[i][j] as the bottom-right corner. dp\[i][j] = min(dp\[i-1][j-1], dp\[i-1][j], dp\[i][j-1]) + 1 | 1 | \ | :exclamation: |
 | 1391 | 检查网格中是否存在有效路径 | 中等 | C++ | dfs，每个位置有两种可能的搜索方向，要根据到来的方向选择其中之一 | 2 | 即使到了终点，进入方向对才是对 |  |
 | 1509 | Minimum Difference Between Largest and Smallest Value in Three Moves | 中等 | C++ | min(nums[n - 4] - nums[0], nums[n - 3] - nums[1], nums[n - 2] - nums[2], nums[n - 1] - nums[3]) (after sorting) | 1 | \ | |
 | 1734 | 解码异或后的排列 | 中等 | C++ | 将encoded数组除第一项之外每隔一项进行异或，得到$p[1]$^ $p[2]$^...^$p[n-1]$，由题目条件可计算$p[0]$^ $p[1]$^...^$p[n-1]$，两者异或得$p[0]$，之后传导求解 | 1 | \ | :question: |
