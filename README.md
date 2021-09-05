@@ -58,6 +58,7 @@
 | 129 | 求根到叶子结点数字之和 | 中等 | C++ | 把上层结点的值存在vector里往下传<br>优解：把上层结点的值用一个数字表示往下传即可 | 2 | 一边null一边有子节点 | |
 | 139 | 单词拆分 | 中等 | C++ | 记忆化搜索<br>dp:`dp[i] = true`表示单词的前i位可以用词表表示，若`dp[i]`为`true`且单词的第`i`到`j`位在词表中则`dp[j]`为`true`。 | 2 | 一开始用set只记了成功的情况导致TLE，换成map把成功和失败的子串都记录即可 | |
 | 146 | LRU Cache | 中等 | C++ | unordered_map + double linked list. Use 2 sentinels (head and tail) | 2 | linked list should also be updated after put | :exclamation::star: |
+| 173 | Binary Search Tree Iterator | 中等 | C++ | Simulate recursion by stack. if a node has right child, while the child has left child recursively push left child into stack. | 1 | \ | :exclamation::star: |
 | 186 | 翻转字符串里的单词 | 中等 | C++ | 用`vector<string>`储存所有单词，反序输出即可<br>优解：把所有单词原地反序，再把整个序列全部反序，O(1)空间原地算法 | 1 | \ |  |
 | 198 | House Robber | 中等 | C++ | dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]) | 1 | \ | |
 | 207 | Course Schedule | 中等 | C++ | 拓扑排序 | 1 | \ | |
@@ -85,6 +86,7 @@
 | 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
 | 416 | Partition Equal Subset Sum | 中等 | C++ | find whether 01 knapsack solution exists. | 1 | \ | :exclamation::star: |
+| 426 | Convert Binary Search Tree to Sorted Doubly Linked List | 中等 | C++ | Record prev Node during the process of inorder traversal. Update left and right for current node and prev, then update current node as prev. | 2 |  |  |
 | 457 | Circular Array Loop | 中等 | C++ | fast and slow pointer, use `((i + nums[i]) % n + n) % n` to simulate circle | 4 | 1. (num%n+n)%n<br>2. Check sign for next pointer, not slow, because some invalid signs can only be met by fast pointer | :star: |
 | 474 | Ones and Zeroes | 中等 | C++ | 2d 01 knapsack | 1 | \ |  |
 | 494 | Target Sum | 中等 | C++ | find 01 knapsack solution number. `dp[i]` is the number of solution that the sum of positive numbers is i.  Return dp[(sum + target)/2]<BR>x : sum of all positive numbers<br>x - (sum - x) = target<br>x = (sum + target) / 2 | 1 | \ | :exclamation::star: |
@@ -93,6 +95,7 @@
 | 503 | Next Greater Element II | 中等 | C++ | monotone stack, the content in stack is index, not value. use `% n` to realize circulation | 1 | \ | |
 | 510 | 二叉搜索树的中序后继II | 中等 | C++ | 有右孩子则找右子树中最小的，否则向上找到第一个比自己大的父节点 | 1 | \ | |
 | 516 | Longest Palindromic Subsequence | 中等 | C++ | if (s[i] == s[j]) dp\[i][j] = dp\[i + 1][j - 1] + 2;<br/>else dp\[i][j] = max(dp\[i + 1][j], dp\[i][j - 1]); | 1 | \ | |
+| 523 | Continuous Subarray Sum | 中等 | C++ | store {runningSum % k, index} into map. If map[runningSum % k] is not empty and the difference of index is greater than 1, then we find a range between two the indexes whose sum % k = 0. | 2 | Init map with {0,-1} | :exclamation: |
 | 542 | 01 Matrix | 中等 | C++ | bfs starting with 0. Dye "1" cells step by step from outer to inner. | 1 | \ | |
 | 554 | 砖墙 | 中等 | C++ | 用map统计前缀和数组中出现最多的数 | 2 | 暴力枚举不可取 | |
 | 560 | Subarray Sum Equals K | 中等 | C++ | Use a map to record how many times a prefix sum has appeared. Then for each number `n` in the array, add mp[n - k] to the answer. | 1 | \ | :exclamation::star: |
@@ -136,7 +139,9 @@
 | 1249 | Minimum Remove to Make Valid Parentheses | 中等 | C++ | remove invalid ')' first, then remove redundant '(' from right to left | 2 | did not remove redundant '(': ()( |  |
 | 1277 | Count Square Submatrices with All Ones | 中等 | C++ | dp\[i][j] means the size of biggest square with matrix\[i][j] as the bottom-right corner. dp\[i][j] = min(dp\[i-1][j-1], dp\[i-1][j], dp\[i][j-1]) + 1 | 1 | \ | :exclamation: |
 | 1391 | 检查网格中是否存在有效路径 | 中等 | C++ | dfs，每个位置有两种可能的搜索方向，要根据到来的方向选择其中之一 | 2 | 即使到了终点，进入方向对才是对 |  |
+| 1428 | Leftmost Column with at Least a One | 中等 | C++ | binary search. Search row by row is better because we can set `high` as ans - 1<br>Better solution: search from top-right corner. If we meet an 1, move left; otherwise move down. Final answer is the column + 1 | 1 | \ | |
 | 1509 | Minimum Difference Between Largest and Smallest Value in Three Moves | 中等 | C++ | min(nums[n - 4] - nums[0], nums[n - 3] - nums[1], nums[n - 2] - nums[2], nums[n - 1] - nums[3]) (after sorting) | 1 | \ | |
+| 1650 | Lowest Common Ancestor of a Binary Tree III | 中等 | C++ | move two pointers from p, q resepectively to their parents. If it becomes null assign it to the another original node. The node where two pointers meet is the answer. | 1 | \ | |
 | 1734 | 解码异或后的排列 | 中等 | C++ | 将encoded数组除第一项之外每隔一项进行异或，得到$p[1]$^ $p[2]$^...^$p[n-1]$，由题目条件可计算$p[0]$^ $p[1]$^...^$p[n-1]$，两者异或得$p[0]$，之后传导求解 | 1 | \ | :question: |
 | offer3 | 数组中重复的数字 | 简单 | C++ | 下标统计，把数字换到以它自身作为下标的位置，如果该位置已有数字相同则重复 | 1 | \ |  |
 | offer4 | 二维数组中的查找 | 简单 | C++ | 线性查找，从右上到左下 | 1 | \ | |
