@@ -63,6 +63,7 @@
 | 198 | House Robber | 中等 | C++ | dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]) | 1 | \ | |
 | 207 | Course Schedule | 中等 | C++ | 拓扑排序 | 1 | \ | |
 | 210 | Course Schedule II | 中等 | C++ | Topological sort | 1 | \ | |
+| 211 | Design Add and Search Words Data Structure | 中等 | C++ | Application of Trie | 4 | Use isEnd to check end<br>incorrect end condition of recursion | |
 | 213 | House Robber II | 中等 | C++ | ans = max(houseRobber(0, n - 2), houseRobber(1, n - 1)) | 2 | n == 2的情况 | |
 | 220 | 存在重复元素III | 中等 | C++ | 双指针法，用set管理双指针内的区间，实现log(n)级别的查找 | 7 | 半年没刷题 复健两行泪 | :star: |
 | 222 | 完全二叉树的节点个数 | 中等 | C++ | 从右往左，如果到最深一层的节点为空则`cnt++`，直至找到第一个在最深一层的非空节点，答案为`2^h - 1 - cnt` | 1 |  | |
