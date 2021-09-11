@@ -107,9 +107,11 @@
 | 633 | 平方数之和 | 中等 | C++ | a从0遍历到$\sqrt c$，判断$c - a^2$是不是平方数 | 1 | \ | |
 | 647 | Palindromic Substrings | 中等 | C++ | expand possible centers. Note that string with length n has 2n - 1 centers. (Consider: "aa")<br>if using dp, dp\[i][j] is a boolean value denoting whether s[i .. j] is palindrome | 1 | \ | |
 | 651 | 4键键盘 | 中等 | C++ | dp。就用O(N^2)的方法，别把问题想太复杂。 | 3 | 只考虑了比较`dp[i-1] + (dp[i-1] - dp[i-2])`和`2*dp[i-3]`，实际上优解可能为`3*dp[i-4]`等 |  |
+| 670 | Maximum Swap | 中等 | C++ | Iterate from right to left. If a number is smaller than current biggest value, then update the indexes to swap as the indexes of this number and current biggest number. | 1 |  | f​b:star: |
 | 672 | 灯泡开关 II | 中等 | C++ | 方法一：第`x`盏灯始终等于第`x+6`盏灯。找出min(n,6)盏灯的m次操作排列数即可。因为操作2次及以上等于操作0或1次，且**进行 A 操作后接 B 操作 和 B 操作后接 A 操作是一样的，所以我们可以假设我们按顺序进行所有操作**。用位运算，遍历0~15即可表示所有可能的操作。将所有合法操作的结果加入set，最后返回set.size()<br>方法二：<br>`light1 = a + b + d`<br/>    `light2 = a + c`<br/>    `light3 = a + b`<br/>    `light4 = a + c + d = light2 + light1 - light3`<br/>    `light5 = a + b = light3`<br/>    `light6 = a + c = light2`<br/>    `light7 = a + b + d = light1`<br>由此可见排列数实际上等于前三盏灯的排列数。考虑min(n,3)的排列数即可。可以直接手动模拟出所有结果。 | 1 | \ | :exclamation::star: |
 | 690 | 员工的重要性 | 简单 | C++ | 先用map整理数据，之后dfs | 1 | \ |  |
 | 708 | 循环有序列表的插入 | 中等 | JS | 先找到循环起点，再从起点出发找合适的插入点 | 4 | 非严格递增<br>JS语法 |  |
+| 708 | Insert into a Sorted Circular Linked List | 中等 | C++ | Insert when 1)  the value sits between two nodes 2) the value >= maximum or <= minimum (to judge maximum or minimum, values in linkedlist cannot all be the same) 3) the linkedlist values are all the same<br>lastnode = head<br>while (lastnode->next != head) {<br>if (lastnodeVal <= val <= nodeval) \|\|<br>val is the minimum \|\| <br>val is the maximum) break;}<br>add the new node after lastnode | 2 | values in the linkedlist are all the same | :star: |
 | 718 | Maximum Length of Repeated Subarray | 中等 | C++ | if (nums1[i - 1] == nums2[j - 1]) dp\[i][j] = dp\[i - 1][j - 1]+1<br>reduce memory to O(N): <br>if (nums1[i - 1] == nums2[j - 1]) dp[j] = dp[j - 1]+1<br>**else dp[j] = 0**<br>iterate in reverse order<br>return maxvalue, not dp\[m][n] | 2 | else dp[j] = 0 | :exclamation::star: |
 | 721 | Accounts Merge | 中等 | C++ | union find, merge id of emails, not user | 3 | TLE, merged users by union find | :exclamation: |
 | 722 | 删除注释 | 中等 | C++ | 3种状态：0：正常，1：行注释，2：块注释<br>优解：状态机，每次根据1个字符而非两个改变状态。OJ词法分析器写过一遍了为什么不用这种高级的解法呢 | 6 | 万恶的/*/ | :star: |
@@ -124,6 +126,7 @@
 | 901 | 股票价格跨度 | 中等 | C++ | 单调栈 | 1 | \ | :exclamation::star: |
 | 907 | Sum of Subarray Minimums | 中等 | C++ | use monotone stacks to find the left boundry and right boundry among which arr[i] is the smallest, then `ans += arr[i] * (i - left) * (right - i)`.  Notice that for contiguous same elements, only count the range in one direction | 4 | mod 1e9+7 |  |
 | 952 | Largest Component Size by Common Factor | 困难 | C++ | use union find to merge every number with all its factors | 1 | \ | :exclamation: |
+| 974 | Subarray Sums Divisible by K | 中等 | C++ | ans += mp[(sum % k + k) % k] | 3 | Incorrect Algorithm(TLE). Did not handle minus sum % k correctly. | :star: |
 | 981 | Time Based Key-Value Store | 中等 | C++ | unordered_map<key, {timestamp, value}> with binary search on timestamp | 1 | \ |  |
 | 990 | Satisfiability of Equality Equations | 中等 | C++ | union find | 1 | \ |  |
 | 1006 | 笨阶乘 | 中等 | C++ | 数学规律 | 2 | n = 4的边界 |  |
@@ -144,6 +147,7 @@
 | 1509 | Minimum Difference Between Largest and Smallest Value in Three Moves | 中等 | C++ | min(nums[n - 4] - nums[0], nums[n - 3] - nums[1], nums[n - 2] - nums[2], nums[n - 1] - nums[3]) (after sorting) | 1 | \ | |
 | 1650 | Lowest Common Ancestor of a Binary Tree III | 中等 | C++ | move two pointers from p, q resepectively to their parents. If it becomes null assign it to the another original node. The node where two pointers meet is the answer. | 1 | \ | |
 | 1734 | 解码异或后的排列 | 中等 | C++ | 将encoded数组除第一项之外每隔一项进行异或，得到$p[1]$^ $p[2]$^...^$p[n-1]$，由题目条件可计算$p[0]$^ $p[1]$^...^$p[n-1]$，两者异或得$p[0]$，之后传导求解 | 1 | \ | :question: |
+| 1792 | Maximum Average Pass Ratio | 中等 | C++ | Use priority_queue. Subtract 1 from extraStudents every time and update the pq. | 2 | use a/b/c instead of a/(b*c). May lead to overflow |  |
 | offer3 | 数组中重复的数字 | 简单 | C++ | 下标统计，把数字换到以它自身作为下标的位置，如果该位置已有数字相同则重复 | 1 | \ |  |
 | offer4 | 二维数组中的查找 | 简单 | C++ | 线性查找，从右上到左下 | 1 | \ | |
 | offer7<br>(105) | 重建二叉树 | 中等 | C++ | 先序中序还原树。递归，注意递归时先序左右边界和中序左右边界 | 1 | \ | |
