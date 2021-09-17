@@ -86,6 +86,7 @@
 | 394 | Decode string | 中等 | C++ | Stack or recursion. Recursion solution: for each level, if char is encountered, add it directly to `ret`; if number is encountered, get the number value `num` until meeting '[', then recursively get the value of a deeper level and add it `num` times to `ret`. ']' or end of original string mark the end of current level. Return `ret` to previous level in this case. | 2 | Do not store char value in variable out of stack if using stack. | :star: |
 | 399 | Evaluate Division | 中等 | C++ | dfs<br>other solutions: floyd, union-find with weights | 2 | forget to consider loops | |
 | 403 | 青蛙过河 | 困难 | C++ | 记忆化dfs | 4 | 不仅失败的路径要记忆，成功的路径也要记忆 | |
+| 408 | Valid Word Abbreviation | 简单 | C++ | processing string. <br>while (ptr1 < a.le() && ptr2 < b.le()) {} <br>return ptr1 == a.le() && ptr2 == b.le(); | 4 | return false if start of number is 0 | fb |
 | 416 | Partition Equal Subset Sum | 中等 | C++ | find whether 01 knapsack solution exists. | 1 | \ | :exclamation::star: |
 | 426 | Convert Binary Search Tree to Sorted Doubly Linked List | 中等 | C++ | Record prev Node during the process of inorder traversal. Update left and right for current node and prev, then update current node as prev. | 2 |  |  |
 | 457 | Circular Array Loop | 中等 | C++ | fast and slow pointer, use `((i + nums[i]) % n + n) % n` to simulate circle | 4 | 1. (num%n+n)%n<br>2. Check sign for next pointer, not slow, because some invalid signs can only be met by fast pointer | :star: |
