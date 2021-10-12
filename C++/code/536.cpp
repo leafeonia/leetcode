@@ -17,25 +17,25 @@ public:
             num += s[idx++];
         }
         TreeNode* node = new TreeNode(stoi(num));
-        if (s[idx] == '(') {
+        if (idx < s.length() && s[idx] == '(') {
             idx++;
             node->left = build(s, idx);
             idx++;
         } else {
-            node->left = NULL;
+            node->left = nullptr;
         }
-        if (s[idx] == '(') {
+        if (idx < s.length() && s[idx] == '(') {
             idx++;
             node->right = build(s, idx);
             idx++;
         } else {
-            node->right = NULL;
+            node->right = nullptr;
         }
         return node;
     }
     
     TreeNode* str2tree(string s) {
-        if (s.empty()) return NULL;
+        if (s.empty()) return nullptr;
         int idx = 0;
         return build(s, idx);
     }
