@@ -9,13 +9,13 @@ public:
             vector<int> b = secondList[j];
             if (a[1] < b[1]) {
                 if (a[1] >= b[0]) {
-                    vector<int> v{max(a[0], b[0]), min(a[1], b[1])};
+                    vector<int> v{max(a[0], b[0]), a[1]};
                     ans.push_back(v);
                 }
                 i++;
             } else {
                 if (b[1] >= a[0]) {
-                    vector<int> v{max(a[0], b[0]), min(a[1], b[1])};
+                    vector<int> v{max(a[0], b[0]), b[1]};
                     ans.push_back(v);
                 }
                 j++;
